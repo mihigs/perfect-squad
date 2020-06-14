@@ -1,20 +1,18 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <Home></Home>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
-import Home from './components/Home.vue'
 
 export default {
 
   name: 'App',
   components:{
     Navbar,
-    Home,
   },
   created(){
     //gets data from JSON blob and saves it to state
@@ -26,5 +24,6 @@ export default {
 <style>
   body{
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
   }
 </style>
