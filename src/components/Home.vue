@@ -14,6 +14,7 @@ export default {
 
 <style>
     .main-container{
+        padding-top: 5vh;
         background-image: url('../assets/stadium.jpg');
         background-position: center;
         background-size: cover;
@@ -24,10 +25,10 @@ export default {
     .field-container{
         background-image: url('../assets/field.jpg');
         background-position: center;
-        background-size: cover;
+        background-size: contain;
         background-repeat: no-repeat;
-        width: 30%;
-        height: 80%;
+        width: 40%;
+        height: 90%;
         margin: auto;
     }
 </style>
