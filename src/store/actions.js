@@ -6,6 +6,9 @@ export default {
         axios.get(url)
         .then(res => {
             commit('loadPlayerData', res.data);
-        });
+        })
+        .catch(error => {
+            commit('errorLoadingPlayerData', error);
+        })
     },
 }

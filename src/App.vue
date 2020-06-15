@@ -25,5 +25,6 @@ export default {
   body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
   }
 </style>

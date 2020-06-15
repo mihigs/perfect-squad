@@ -4,17 +4,21 @@
         <p>Perfect Squad</p>
       </div>
       <div class="navbar-menu">
-        <p class="navbar-menu-item">Players</p>
-        <p class="navbar-menu-item">Favorites</p>
-        <p class="navbar-menu-item">Formations: </p>
+        <router-link to="/players" class="navbar-menu-item">Players</router-link>
+        <router-link to="/favorites" class="navbar-menu-item">Favorites</router-link>
+        <FormationDropdown></FormationDropdown>
       </div>
   </div>
 </template>
 
 <script>
+import FormationDropdown from './FormationDropdown'
+
 export default {
     name: 'Navbar',
-
+    components:{
+        FormationDropdown,
+    },
 }
 </script>
 
@@ -31,7 +35,8 @@ export default {
         rgba(0,0,0,0.3);
         color: white;
 
-        position: sticky;
+        position: fixed;
+        top: 0;
     }
     .navbar-logo{
         font-weight: bold;
@@ -40,10 +45,15 @@ export default {
     .navbar-menu{
         display: flex;
         align-content: flex-end;
-        line-height: 50%;
     }
     .navbar-menu-item{
-        margin-left: 20px;
+        margin-left: 25px;
+        line-height: 250%;
+        color: white;
+        text-decoration: none;
         /* cekirat marginu ovdje */
+    }
+    .navbar-menu-item:hover{
+        color: #f09e00;
     }
 </style>

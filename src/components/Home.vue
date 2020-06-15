@@ -14,12 +14,12 @@ export default {
 
 <style>
     .main-container{
-        padding-top: 5vh;
+        padding-top: 6%;
         background-image: url('../assets/stadium.jpg');
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        height: 95vh;
+        height: 90vh;
         width: 100%;
     }
     .field-container{
