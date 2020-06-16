@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'FavoritesView',
+  name: 'Favorites',
 
 }
 </script>

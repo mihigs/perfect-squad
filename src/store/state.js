@@ -9,4 +9,9 @@ export default {
         ATT: [],
         NA: [],
     },
+    selectedFormation: {
+        id: -1,
+        formation: {},
+        parsedFormation: [],
+    },
 }

@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import FormationDropdown from './formation-dropdown'
+import FormationDropdown from './FormationDropdown'
 
 export default {
-    name: 'NavbarElement',
+    name: 'Navbar',
     components:{
         FormationDropdown,
     },

@@ -11,4 +11,7 @@ export default {
             commit('errorLoadingPlayerData', error);
         })
     },
+    selectFormation({commit}, data){
+        commit('saveSelectedFormation', data);
+    }
 }

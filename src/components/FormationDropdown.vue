@@ -4,7 +4,8 @@
             Formation: {{selectedFormation}}
         </div>
         <div v-if="showDropdown">
-            <div class="dropdown-item" v-for="formation in formations" :key="formation" @click="selectFormation(formation)">{{formation}}
+            <div class="dropdown-item" v-for="(formation, index) in formations" :key="index" @click="selectFormation(formation, index)">
+                {{formation}}
             </div>
         </div>
     </div>
@@ -25,9 +26,11 @@ export default {
         toggleDropdown: function(){
             this.showDropdown = !this.showDropdown;
         },
-        selectFormation: function(formation){
+        selectFormation: function(formation, index){
             this.selectedFormation = formation;
             this.showDropdown = false;
+            //saves selected formation to the state
+            this.$store.dispatch('selectFormation', { formation: formation, index: index });
         },
     },
     created(){

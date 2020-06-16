@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../components/home-view'
-import Players from '../components/players-view'
-import Favorites from '../components/favorites-view'
+import Home from '../components/Home'
+import Players from '../components/Players'
+import Favorites from '../components/Favorites'
 
 Vue.use(VueRouter);
 

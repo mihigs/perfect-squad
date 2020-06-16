@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import PlayersItem from './players-item'
+import PlayersItem from './PlayersItem'
 
 export default {
   name: 'Players',
