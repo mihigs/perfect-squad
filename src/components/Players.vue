@@ -56,6 +56,8 @@ export default {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: scroll;
+    overflow-x: hidden;
   }
   .players-secondary-container{
     width: 90%;

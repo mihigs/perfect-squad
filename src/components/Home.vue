@@ -76,6 +76,7 @@ export default {
         width: 400px;
         height: 600px;
         margin: auto;
+        border: 2px solid darkslategray;
     }
     .field-UI-container{
         padding-top: 2%;

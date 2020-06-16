@@ -1,8 +1,15 @@
 <template>
   <div class="players-item">
-      <div class="players-item-favorite-icon"></div>
-      <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
-      <div class="players-item-position">{{player.stats.position}}</div>
+      <div class="players-item-bar">
+        <div class="players-item-favorite-icon"></div>
+        <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
+        <div class="players-item-position">{{player.stats.position}}</div>
+      </div>
+      <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
+      <div class="players-item-bottom">
+        <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
+        <div class="players-item-club-name">{{player.stats.club}}</div>
+      </div>
   </div>
 </template>
 
@@ -16,6 +23,7 @@ export default {
 <style>
   .players-item{
     width: 95%;
+    height: 50vh;
     margin: auto;
     margin-bottom: 3%;
     background-color: gainsboro;
@@ -23,6 +31,10 @@ export default {
     line-height: 300%;
     font-weight: bold;
     font-size: 80%;
+    cursor: pointer;
+  }
+  .players-item:hover{
+    background-color: rgb(190, 190, 190);
   }
   .players-item-favorite-icon{
       background-image: url('../assets/favorite-heart-empty.svg');
@@ -41,9 +53,27 @@ export default {
       font-size: 90%;
       color: rgb(37, 48, 48);
   }
+  .players-item-image{
+    width: 100%;
+    height: 80%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
   .players-item-position{
       float: right;
       width: 18%;
-
+  }
+  .players-item-club-icon{
+    float: left;
+    height: 35px;
+    width: 35px;
+    margin: 1px 2%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .players-item-club-name{
+    text-align: left;
+    color: rgb(37, 48, 48);
   }
 </style>
