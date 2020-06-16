@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
-      <div class="navbar-logo">
+      <router-link to="/home" class="navbar-logo">
         <p>Perfect Squad</p>
-      </div>
+      </router-link>
       <div class="navbar-menu">
         <router-link to="/players" class="navbar-menu-item">Players</router-link>
         <router-link to="/favorites" class="navbar-menu-item">Favorites</router-link>
@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import FormationDropdown from './FormationDropdown'
+import FormationDropdown from './formation-dropdown'
 
 export default {
-    name: 'Navbar',
+    name: 'NavbarElement',
     components:{
         FormationDropdown,
     },
@@ -41,6 +41,8 @@ export default {
     .navbar-logo{
         font-weight: bold;
         line-height: 50%;
+        color: white;
+        text-decoration: none;
     }
     .navbar-menu{
         display: flex;

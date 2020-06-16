@@ -4,7 +4,8 @@
             Formation: {{selectedFormation}}
         </div>
         <div v-if="showDropdown">
-            <div class="dropdown-item" v-for="formation in formations" :key="formation" @click="selectFormation(formation)">{{formation}}</div>
+            <div class="dropdown-item" v-for="formation in formations" :key="formation" @click="selectFormation(formation)">{{formation}}
+            </div>
         </div>
     </div>
 </template>
@@ -57,6 +58,7 @@ export default {
         height: 100%;
         width: 175px;
         text-align: center;
+        cursor: pointer;
     }
     .dropdown-container:hover{
         color: #f09e00;
@@ -67,8 +69,9 @@ export default {
         width: 100%;
         height: 50px;
         line-height: 250%;
+        cursor: pointer;
     }
-    .dropdown-container:hover{
+    .dropdown-item:hover{
         color: #f09e00;
     }
 </style>

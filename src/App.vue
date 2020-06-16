@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <Navbar></Navbar>
+  <div class="main-container">
+    <NavbarElement></NavbarElement>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
+import NavbarElement from './components/navbar-element.vue'
 
 export default {
 
   name: 'App',
   components:{
-    Navbar,
+    NavbarElement,
   },
   created(){
     //gets data from JSON blob and saves it to state
@@ -23,8 +23,11 @@ export default {
 
 <style>
   body{
-    margin: 0;
+      margin: 0;
+      overflow: hidden;
+  }
+  .main-container{
     font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
+    margin-top: 5vh;
   }
 </style>
