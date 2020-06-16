@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style>
-    .players-item{
+  .players-item{
     width: 95%;
     margin: auto;
     margin-bottom: 3%;
@@ -25,11 +25,16 @@ export default {
     font-size: 80%;
   }
   .players-item-favorite-icon{
-      background-image: url('../assets/favorite-heart.png');
+      background-image: url('../assets/favorite-heart-empty.svg');
+      background-position: center;
       background-repeat: no-repeat;
       float: left;
-      height: 30px;
-      width: 30px;
+      margin-top: 2%;
+      height: 25px;
+      width: 40px;
+  }
+  .players-item-added-to-favorites{
+      background-image: url('../assets/favorite-heart-filled.svg');
   }
   .players-item-name{
       display: inline;
