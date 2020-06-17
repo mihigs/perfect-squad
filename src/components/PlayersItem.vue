@@ -1,22 +1,43 @@
 <template>
-  <div class="players-item">
-      <div class="players-item-bar">
-        <div class="players-item-favorite-icon"></div>
-        <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
-        <div class="players-item-position">{{player.stats.position}}</div>
-      </div>
-      <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
-      <div class="players-item-bottom">
-        <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
-        <div class="players-item-club-name">{{player.stats.club}}</div>
-      </div>
+  <div>
+    <div class="players-item" @click="showDetails()">
+          <div class="players-item-bar">
+            <div class="players-item-favorite-icon"></div>
+            <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
+            <div class="players-item-position">{{player.stats.position}}</div>
+          </div>
+          <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
+          <div class="players-item-bottom">
+            <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
+            <div class="players-item-club-name">{{player.stats.club}}</div>
+          </div>
+    </div>
+    <PlayersDetailsPopup v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
   </div>
 </template>
 
 <script>
+import PlayersDetailsPopup from './PlayersDetailsPopup'
+
 export default {
     name: 'PlayersItem',
     props: ['player'], 
+    components: {
+      PlayersDetailsPopup,
+    },
+    data(){
+      return{
+        detailsOpen: false,
+      }
+    },
+    methods: {
+      showDetails: function() {
+        this.detailsOpen = true;
+      },
+      hideDetails: function(){
+        this.detailsOpen = false;
+      },
+    },
 }
 </script>
 

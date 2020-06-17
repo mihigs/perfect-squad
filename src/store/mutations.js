@@ -5,8 +5,19 @@ export default {
         state.formations = data.formations;
         state.status = 1;
 
-        //sorting players based on position
+        //adds meta data and sorts players based on position
         state.players.forEach(player => {
+            //adds the array for future ratings
+            player.rating = [];
+            //capitalises player nationality
+            player.nationality[0].toUpperCase()
+            let tempNationality = player.nationality.slice(1)
+            player.nationality = player.nationality[0].toUpperCase() + tempNationality;
+            //calculates players age
+            let today = new Date();
+            today = today.getTime()
+            player.stats.age = new Date(today - Date.parse(player.stats.birthDate)).getUTCFullYear() - 1970;
+
             let tempPosition = player.stats.position;
             if(tempPosition === 'GK'){
                 state.sortedPlayers.GK.push(player);
@@ -31,7 +42,7 @@ export default {
         state.selectedFormation.id = data.index;
         state.selectedFormation.formation = data.formation;
 
-        //we need to parse formation data so it can be displayed by the UI
+        //we need to parse formation data so it can be displayed by the UI dynamically
         let tempParsedFormation = [];
         tempParsedFormation = state.selectedFormation.formation.split('-');
         //parses string to numbers

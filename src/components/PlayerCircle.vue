@@ -16,6 +16,7 @@ export default {
         border-radius: 50%;
         border: 2px solid rgb(32, 32, 32);
         align-self: flex-end;
+        cursor: pointer;
     }
     .player-circle:hover{
         border: 2px solid rgb(56, 56, 56);

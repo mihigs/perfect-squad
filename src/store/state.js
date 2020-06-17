@@ -10,8 +10,10 @@ export default {
         NA: [],
     },
     selectedFormation: {
+        //default id is -1, when no formation is selected
         id: -1,
         formation: {},
+        //parsed formation data, to be used for display on the homepage
         parsedFormation: [],
     },
 }
