@@ -11,7 +11,7 @@
             <div class="details-basic-info-header">
                 <div class="details-player-name">{{player.name}} {{player.lastName}}</div>
                 <div class="details-player-position"><div class="details-player-position-text">{{player.stats.position}}</div></div>
-                <div class="details-player-rating"></div>
+                <PlayersStars v-bind:player="player"></PlayersStars>
             </div>
             <div class="details-player-picture" :style="{ backgroundImage: `url(${player.formationPicture}`}"></div>
             <!-- Nationality -->
@@ -37,15 +37,22 @@
         </div>
 
         <!-- Right side -->
-        <div class="details-stats-info"></div>
+        <div class="details-stats-info">
+            
+        </div>
     </div>
 </div>
 </template>
 
 <script>
+import PlayersStars from './PlayersStars'
+
 export default {
     name: 'PlayersDetailsPopup',
     props: ['player', 'detailsOpen'],
+    components: {
+        PlayersStars,
+    },
     data(){
         return{
         }
@@ -134,12 +141,12 @@ export default {
         float: right;
     }
     .details-player-picture{
-        width: 25%;
-        height: 25%;
+        width: 30%;
+        height: 30%;
         border-radius: 50%;
         background-size: contain;
+        background-position: center;
         background-repeat: no-repeat;
-        margin-bottom: 2%;
     }
     .details-bar{
         width: 95%;

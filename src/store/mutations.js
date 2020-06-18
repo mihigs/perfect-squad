@@ -1,12 +1,15 @@
 export default {
     //loads data from JSON blob into state
     loadPlayerData(state, data){
-        state.players = data.players;
+        // state.players = data.players;
         state.formations = data.formations;
         state.status = 1;
 
         //adds meta data and sorts players based on position
-        state.players.forEach(player => {
+        data.players.forEach((player, index) => {
+            //adds a unique ID for each player
+            player.ID = index;
+            state.players.push(player);
             //adds the array for future ratings
             player.rating = [];
             //capitalises player nationality
@@ -72,5 +75,8 @@ export default {
         }
         //saves the parsed formation to state
         state.selectedFormation.parsedFormation = tempParsedFormation;
+    },
+    savePlayerRating(state, { rating, playerID }){
+        state.players[playerID].rating.push(rating);
     },
 }

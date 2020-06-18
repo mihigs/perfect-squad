@@ -13,5 +13,8 @@ export default {
     },
     selectFormation({commit}, data){
         commit('saveSelectedFormation', data);
+    },
+    addPlayerRating({commit}, data){
+        commit('savePlayerRating', data);
     }
 }
