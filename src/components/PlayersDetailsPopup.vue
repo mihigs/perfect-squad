@@ -15,7 +15,7 @@
             </div>
             <div class="details-player-picture" :style="{ backgroundImage: `url(${player.formationPicture}`}"></div>
             <!-- Nationality -->
-            <div class="details-bar">{{player.nationality}}
+            <div class="details-bar">{{capitaliseString(player.nationality)}}
                 <div class="details-player-icon details-data" :style="{ backgroundImage: `url(${player.nationalityFlag}`}"></div>
             </div>
             <!-- Club -->
@@ -38,7 +38,16 @@
 
         <!-- Right side -->
         <div class="details-stats-info">
-            
+            <div class="stats-bar" v-for="(playerSkill, index) in player.playerSkills" :key="index">
+                <div class="stats-name">{{capitaliseString(playerSkill.name)}}</div>
+                    <div class="skill-progress-container" v-for="(specificSkill, index) in playerSkill.skills" :key="index">
+                        <div class="progress-name"> {{capitaliseString(specificSkill.name)}}</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" :style="{width: `${specificSkill.value}%`}"></div>
+                            </div>  
+                            <div class="progress-amount">{{specificSkill.value}}</div>           
+                    </div>     
+            </div>
         </div>
     </div>
 </div>
@@ -62,6 +71,10 @@ export default {
         closePopup: function() {
             this.$emit('closePopup');
         },
+        capitaliseString: function(string){
+            let tempString = string.slice(1)
+            return string[0].toUpperCase() + tempString;
+        },
     },
     computed: {
         //only prefered foot is in the data, so we just switch to get the weak foot
@@ -81,7 +94,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     .popup-background-fade{
         width: 100%;
         height: 100%;
@@ -97,7 +110,7 @@ export default {
         top: 12%;
         bottom: 13%;
         right: 15%;
-        left: 15%;
+        left: 10%;
         background-color: gainsboro;
         box-shadow: 0px 2px 2px 0
         rgba(0,0,0,0.3);
@@ -109,15 +122,6 @@ export default {
         width: 50%;
         height: 100%;
         float: left;
-        padding: 2%;
-    }
-    .details-stats-info{
-        box-sizing: border-box;
-        width: 49%;
-        height: 100%;
-        border-left: 2px solid gray;
-        background-color: rgb(177, 175, 175);
-        float: right;
         padding: 2%;
     }
     .details-player-name{
@@ -164,5 +168,59 @@ export default {
         width: 10%;
         background-size: contain;
         background-repeat: no-repeat;
+    }
+    .details-stats-info{
+        box-sizing: border-box;
+        width: 49%;
+        height: 100%;
+        border-left: 2px solid gray;
+        float: right;
+        padding: 1%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+        &::-webkit-scrollbar-track {
+            background: gray;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgb(46, 46, 46);
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgb(68, 68, 68);
+        }
+        .stats-bar{
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 2%;
+            // padding-bottom: 3%;
+            box-sizing: border-box;
+            .stats-name{
+                background-color: white;
+                padding: 5px;
+                font-weight: bold;
+            }
+            .skill-progress-container{
+                margin: 4% 0 4% 2%;
+                font-size: 80%;
+                display: flex;
+                .progress-name{
+                    width: 20%;
+                }
+                .progress-bar-container{
+                    width: 73%;
+                    height: 4px;
+                    background-color: gray;
+                    margin: auto;
+                }
+                .progress-bar{
+                    height: 4px;
+                    width: 0px;
+                    transition: all 2s ease-in-out;
+                    background-color: green;
+                }
+            }
+        }
     }
 </style>

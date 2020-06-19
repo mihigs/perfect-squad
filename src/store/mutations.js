@@ -12,11 +12,6 @@ export default {
             state.players.push(player);
             //adds the array for future ratings
             player.rating = [];
-            //capitalises player nationality
-            player.nationality[0].toUpperCase()
-            let tempNationality = player.nationality.slice(1)
-            player.nationality = player.nationality[0].toUpperCase() + tempNationality;
-            //calculates players age
             let today = new Date();
             today = today.getTime()
             player.stats.age = new Date(today - Date.parse(player.stats.birthDate)).getUTCFullYear() - 1970;

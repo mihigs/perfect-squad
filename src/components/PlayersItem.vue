@@ -12,7 +12,7 @@
             <div class="players-item-club-name">{{player.stats.club}}</div>
           </div>
     </div>
-    <PlayersDetailsPopup v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
+      <PlayersDetailsPopup v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
   </div>
 </template>
 
