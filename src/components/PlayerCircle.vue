@@ -1,10 +1,32 @@
 <template>
-  <div class="player-circle"></div>
+  <div class="player-circle" @click="openPlayerSelectPopup()">
+      <SelectPlayerPopup @closePopup="closePlayerSelectPopup()" v-show="popupShown" v-bind:position="position"></SelectPlayerPopup>
+  </div>
 </template>
 
 <script>
+import SelectPlayerPopup from './SelectPlayerPopup'
+
 export default {
     name: 'PlayerCircle',
+    props: [ 'position' ],
+    components: {
+        SelectPlayerPopup,
+    },
+    data(){
+        return {
+            selectedPlayer: {},
+            popupShown: false,
+        }
+    },
+    methods: {
+        openPlayerSelectPopup: function(){
+            this.popupShown = true;
+        },
+        closePlayerSelectPopup: function(){
+            this.popupShown = false;
+        },
+    },
 }
 </script>
 

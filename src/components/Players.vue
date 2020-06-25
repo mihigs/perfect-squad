@@ -6,22 +6,40 @@
       <!-- GK column -->
       <div class="players-category-column">
         <div class="players-category-bar-button" id="category-GK">GK</div>
-        <PlayersItem v-bind:style="{ color: '#54688e'}" v-for="(player, index) in sortedPlayers.GK" :key="index" v-bind:player="player"></PlayersItem>
+          <PlayersItem 
+          v-bind:style="{ color: '#54688e'}" 
+          v-for="(player, index) in sortedPlayersIDs.GK" :key="index" 
+          v-bind:player="players[player]"
+          v-bind:expanded="false">
+          </PlayersItem>
       </div>
       <!-- DEF column -->
       <div class="players-category-column">
         <div class="players-category-bar-button">DEF</div>
-        <PlayersItem v-bind:style="{ color: '#4e202c'}" v-for="(player, index) in sortedPlayers.DEF" :key="index" v-bind:player="player"></PlayersItem>
+          <PlayersItem
+          v-bind:style="{ color: '#4e202c'}" 
+          v-for="(player, index) in sortedPlayersIDs.DEF" :key="index" 
+          v-bind:player="players[player]"
+          v-bind:expanded="false">
+          </PlayersItem>
       </div>
       <!-- MID column -->
       <div class="players-category-column">
         <div class="players-category-bar-button">MID</div>
-        <PlayersItem v-bind:style="{ color: '#0b8227'}" v-for="(player, index) in sortedPlayers.MID" :key="index" v-bind:player="player"></PlayersItem>
+          <PlayersItem v-bind:style="{ color: '#0b8227'}" 
+          v-for="(player, index) in sortedPlayersIDs.MID" :key="index" 
+          v-bind:player="players[player]"
+          v-bind:expanded="false">
+          </PlayersItem>
       </div>
       <!-- ATT column -->
       <div class="players-category-column">
         <div class="players-category-bar-button">ATT</div>
-        <PlayersItem v-bind:style="{ color: '#cdcf32'}" v-for="(player, index) in sortedPlayers.ATT" :key="index" v-bind:player="player"></PlayersItem>
+          <PlayersItem v-bind:style="{ color: '#cdcf32'}" 
+          v-for="(player, index) in sortedPlayersIDs.ATT" :key="index" 
+          v-bind:player="players[player]"
+          v-bind:expanded="false">
+          </PlayersItem>
       </div>
     </div>
     
@@ -38,12 +56,14 @@ export default {
   },
   data(){
     return{
-      sortedPlayers: {},
+      sortedPlayersIDs: {},
+      players: [],
     }
   },
   created(){
-    //gets sorted players from state
-    this.sortedPlayers = this.$store.getters.sortedPlayers;
+    //gets data from the store
+    this.sortedPlayersIDs = this.$store.getters.sortedPlayersIDs;
+    this.players = this.$store.getters.players;
   }
 }
 </script>

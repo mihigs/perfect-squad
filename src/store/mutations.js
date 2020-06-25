@@ -10,24 +10,25 @@ export default {
             //adds a unique ID for each player
             player.ID = index;
             state.players.push(player);
+            
             //adds the array for future ratings
             player.rating = [];
+
+            //calculates and adds the age to the player data
             let today = new Date();
             today = today.getTime()
             player.stats.age = new Date(today - Date.parse(player.stats.birthDate)).getUTCFullYear() - 1970;
 
+            //saves sorted players' IDs in an array
+            //the array is used to easily access players on certain positions
             let tempPosition = player.stats.position;
-            if(tempPosition === 'GK'){
-                state.sortedPlayers.GK.push(player);
-            }else if(tempPosition[1] === 'B'){
-                state.sortedPlayers.DEF.push(player);
-            }else if(tempPosition[1] === 'M'){
-                state.sortedPlayers.MID.push(player);
-            }else if(tempPosition[1] === 'W' || tempPosition === 'CF'){
-                state.sortedPlayers.ATT.push(player);
-            }else{
-                //if a player doesnt have their position listed
-                state.sortedPlayers.NA.push(player);
+            switch (tempPosition[1]){
+                case 'K': state.sortedPlayersIDs.GK.push(player.ID); break;
+                case 'B': state.sortedPlayersIDs.DEF.push(player.ID); break;
+                case 'M': state.sortedPlayersIDs.MID.push(player.ID); break;
+                case 'W': state.sortedPlayersIDs.ATT.push(player.ID); break;
+                case 'F': state.sortedPlayersIDs.ATT.push(player.ID); break;
+                default: state.sortedPlayersIDs.NA.push(player.ID);
             }
         });
     },

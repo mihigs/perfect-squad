@@ -1,16 +1,20 @@
 <template>
   <div>
-    <div class="players-item" @click="showDetails()">
-          <div class="players-item-bar">
+    <div class="players-item">
+          <div class="players-item-bar" @click="expandPlayer()">
             <div class="players-item-favorite-icon"></div>
             <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
             <div class="players-item-position">{{player.stats.position}}</div>
           </div>
-          <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
-          <div class="players-item-bottom">
-            <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
-            <div class="players-item-club-name">{{player.stats.club}}</div>
-          </div>
+          <transition>
+            <div class="players-expanded" v-show="playerExpanded" @click="showDetails()">
+              <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
+              <div class="players-item-bottom">
+                <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
+                <div class="players-item-club-name">{{player.stats.club}}</div>
+              </div>
+            </div>
+          </transition>
     </div>
       <PlayersDetailsPopup v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
   </div>
@@ -21,13 +25,14 @@ import PlayersDetailsPopup from './PlayersDetailsPopup'
 
 export default {
     name: 'PlayersItem',
-    props: ['player'], 
+    props: ['player', 'expanded'], 
     components: {
       PlayersDetailsPopup,
     },
     data(){
       return{
         detailsOpen: false,
+        playerExpanded: false,
       }
     },
     methods: {
@@ -35,8 +40,14 @@ export default {
         this.detailsOpen = true;
       },
       hideDetails: function(){
-        this.detailsOpen = false;
+        this.detailsOpen = false
       },
+      expandPlayer: function(){
+        if(this.expanded === false) this.playerExpanded = !this.playerExpanded;
+      },
+    },
+    created(){
+      this.playerExpanded = this.expanded;
     },
 }
 </script>
@@ -44,14 +55,13 @@ export default {
 <style>
   .players-item{
     width: 95%;
-    height: 50vh;
     margin: auto;
     margin-bottom: 3%;
     background-color: gainsboro;
     text-align: center;
     line-height: 300%;
     font-weight: bold;
-    font-size: 80%;
+    font-size: 90%;
     cursor: pointer;
   }
   .players-item:hover{
@@ -69,14 +79,21 @@ export default {
   .players-item-added-to-favorites{
       background-image: url('../assets/favorite-heart-filled.svg');
   }
+  .players-item-bar{
+    height: 12%;
+  }
   .players-item-name{
       display: inline;
       font-size: 90%;
       color: rgb(37, 48, 48);
   }
+  .players-expanded{
+    width: 100%;
+    height: 88%;
+  }
   .players-item-image{
     width: 100%;
-    height: 80%;
+    height: 250px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
@@ -84,6 +101,11 @@ export default {
   .players-item-position{
       float: right;
       width: 18%;
+  }
+  .players-item-bottom{
+    height: 12%;
+    padding-top: 1.3%;
+    line-height: 250%;
   }
   .players-item-club-icon{
     float: left;

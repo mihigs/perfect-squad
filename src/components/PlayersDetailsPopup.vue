@@ -185,7 +185,7 @@ export default {
             background: gray;
         }
         &::-webkit-scrollbar-thumb {
-            background: rgb(46, 46, 46);
+            background: rgb(49, 49, 49);
         }
         &::-webkit-scrollbar-thumb:hover {
             background: rgb(68, 68, 68);
