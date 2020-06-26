@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="dropdown-container" @click="toggleDropdown()">
+        <div class="dropdown-button" @click="toggleDropdown()">
             Formation: {{selectedFormation}}
         </div>
-        <div v-if="showDropdown">
+        <div class="dropdown-container" v-if="showDropdown">
             <div class="dropdown-item" v-for="(formation, index) in formations" :key="index" @click="selectFormation(formation, index)">
                 {{formation}}
             </div>
@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style>
-    .dropdown-container{
+    .dropdown-button{
         margin-left: 10px;
         line-height: 250%;
         height: 100%;
@@ -63,8 +63,13 @@ export default {
         text-align: center;
         cursor: pointer;
     }
-    .dropdown-container:hover{
+    .dropdown-button:hover{
         color: #f09e00;
+    }
+    .dropdown-container{
+        /* provjeriti */
+        position: relative;
+        z-index: -2;
     }
     .dropdown-item{
         text-align: center;

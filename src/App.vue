@@ -1,7 +1,10 @@
 <template>
   <div class="main-container">
     <Navbar></Navbar>
-    <router-view></router-view>
+    <!-- keeps the data from the UI on the homepage -->
+    <keep-alive include="Home">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

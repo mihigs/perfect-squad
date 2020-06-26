@@ -2,7 +2,7 @@
   <div>
     <div class="players-item">
           <div class="players-item-bar" @click="expandPlayer()">
-            <div class="players-item-favorite-icon"></div>
+            <FavoritesHeart v-bind:toggleable="editFavorite" v-bind:toggled="player.favorite" @toggleFavorite="toggleFavorite($event)"></FavoritesHeart>
             <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
             <div class="players-item-position">{{player.stats.position}}</div>
           </div>
@@ -22,12 +22,14 @@
 
 <script>
 import PlayersDetailsPopup from './PlayersDetailsPopup'
+import FavoritesHeart from './FavoritesHeart'
 
 export default {
     name: 'PlayersItem',
-    props: ['player', 'expanded'], 
+    props: ['player', 'expanded', 'editFavorite'], 
     components: {
       PlayersDetailsPopup,
+      FavoritesHeart,
     },
     data(){
       return{
@@ -44,6 +46,13 @@ export default {
       },
       expandPlayer: function(){
         if(this.expanded === false) this.playerExpanded = !this.playerExpanded;
+      },
+      toggleFavorite: function(event){
+        if(this.editFavorite)
+          this.$store.dispatch('toggleFavorite', {playerID: this.player.ID});
+        //if the user selects a player, close the popup menu
+        if(event.addedToFavorites) this.$emit('closePopup', {playerID: this.player.ID});
+        else if(!event.addedToFavorites) this.$emit('removeSelectedPlayer');
       },
     },
     created(){
@@ -75,9 +84,6 @@ export default {
       margin-top: 2%;
       height: 25px;
       width: 40px;
-  }
-  .players-item-added-to-favorites{
-      background-image: url('../assets/favorite-heart-filled.svg');
   }
   .players-item-bar{
     height: 12%;

@@ -4,4 +4,5 @@ export default {
     status: state => state.status,
     sortedPlayersIDs: state => state.sortedPlayersIDs,
     selectedFormation: state => state.selectedFormation,
+    favoritePlayers: state => state.favoritePlayers,
 }

@@ -1,16 +1,19 @@
 <template>
   <div class="select-player-popup-container">
-      <div class="position-name">{{position}}</div>
+      <div class="position-name">{{exactPosition}}</div>
       <div class="sort-bar">
-        <div class="sort-option">Popularity</div>
-        <div class="sort-option">Value</div>
-        <div class="sort-option">Age</div>
+        <div class="sort-option" v-bind:class="{active: sortedBy === 0}" @click="sortByPopularity()">Popularity</div>
+        <div class="sort-option" v-bind:class="{active: sortedBy === 1}" @click="sortByValue()">Value</div>
+        <div class="sort-option" v-bind:class="{active: sortedBy === 2}" @click="sortByAge()">Age</div>
       </div>
       <div class="menu-container">
-          <div class="players-item-container" v-for="(playerID, index) in playersIDs" :key="index">
+          <div class="players-item-container" v-for="player in players" :key="player.ID">
             <PlayersItem 
-            v-bind:player="players[playerID]"
-            v-bind:expanded="true">
+            v-bind:player="player"
+            v-bind:expanded="true"
+            v-bind:editFavorite="true"
+            @closePopup="closePopup($event)"
+            @removeSelectedPlayer="removeSelectedPlayer()">
             </PlayersItem>
           </div>
       </div>
@@ -22,29 +25,56 @@ import PlayersItem from './PlayersItem'
 
 export default {
     name: 'SelectPlayerPopup',
-    props: [ 'position' ],
+    props: [ 'generalPosition', 'exactPosition', 'selectedPlayer' ],
     components: {
         PlayersItem,
     },
     data(){
         return {
-            playersIDs: [],
             players: [],
+            sortedBy: 0,
         }
     },
     methods: {
-        closePopup: function(){
-            this.$emit('closePopup');
+        closePopup: function(event){
+            this.$emit('closePopup', {playerID: event.playerID});
+        },
+        removeSelectedPlayer: function(){
+            this.$emit('removeSelectedPlayer');
+        },
+        sortByPopularity: function(){
+            this.players = this.players = this.players.sort(function(a, b){ return b.rating - a.rating });
+            this.sortedBy = 0;
+        },
+        sortByValue: function(){
+            this.players = this.players = this.players.sort(function(a, b){ 
+                return parseInt(b.stats.value.slice(1).split('.').join('')) - parseInt(a.stats.value.slice(1).split('.').join('')) 
+                });
+            this.sortedBy = 1;
+        },
+        sortByAge: function(){
+            this.players = this.players = this.players.sort(function(a, b){ return a.stats.age - b.stats.age });
+            this.sortedBy = 2;
         },
     },
     created(){
+        //always puts the current favorite player for this position on the beggining
+        if(this.selectedPlayer)
+            this.players.unshift(this.selectedPlayer);
         //gets all the players for this position from the store
-        this.playersIDs = this.$store.getters.sortedPlayersIDs[this.position];
-        this.players = this.$store.getters.players;
-        //listens for esc keypress to close the popup
-        document.addEventListener('keydown', (e)=>{
-            if(e.keyCode === 27) this.closePopup();
+        let playersIDs = this.$store.getters.sortedPlayersIDs[this.generalPosition];
+        let players = this.$store.getters.players;
+        playersIDs.forEach(playerID => {
+            players[playerID].stats.posiblePositions.forEach(position => {
+                if(this.exactPosition === position && !players[playerID].favorite) 
+                    this.players.push(players[playerID]);
+            });
         });
+        //sorts the players by popularity by default
+        this.sortByPopularity();
+
+        //listens for scrolling, used to scroll elements horizontally
+        // document.addEventListener('')
     },
 }
 </script>
@@ -57,6 +87,7 @@ export default {
         position: absolute;
         bottom: 0px;
         left: 0px;
+        z-index: 1;
         cursor: default;
 
         .position-name{
@@ -79,17 +110,23 @@ export default {
                 width: 33%;
                 height: 100%;
                 display: inline-block;
+                cursor: pointer;
+
+                &.active{
+                    color: #808080;
+                }
             }
         }
         .menu-container{
             width: 90%;
             height: 50%;
             margin: 10% 0 0 10%;
-            overflow-x: scroll;
+            display: flex;
             overflow-y: hidden;
+            overflow-x: scroll;
             .players-item-container{
-                width: 250px;
-                display: inline-block;
+                height: 100%;
+                flex: 0 0 23%;
             }
         }
     }

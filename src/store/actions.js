@@ -16,5 +16,8 @@ export default {
     },
     addPlayerRating({commit}, data){
         commit('savePlayerRating', data);
-    }
+    },
+    toggleFavorite({commit}, data){
+        commit('toggleFavorite', data);
+    },
 }

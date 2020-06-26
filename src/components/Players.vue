@@ -10,7 +10,8 @@
           v-bind:style="{ color: '#54688e'}" 
           v-for="(player, index) in sortedPlayersIDs.GK" :key="index" 
           v-bind:player="players[player]"
-          v-bind:expanded="false">
+          v-bind:expanded="false"
+          v-bind:editFavorite="false">
           </PlayersItem>
       </div>
       <!-- DEF column -->
@@ -20,7 +21,8 @@
           v-bind:style="{ color: '#4e202c'}" 
           v-for="(player, index) in sortedPlayersIDs.DEF" :key="index" 
           v-bind:player="players[player]"
-          v-bind:expanded="false">
+          v-bind:expanded="false"
+          v-bind:editFavorite="false">
           </PlayersItem>
       </div>
       <!-- MID column -->
@@ -29,7 +31,8 @@
           <PlayersItem v-bind:style="{ color: '#0b8227'}" 
           v-for="(player, index) in sortedPlayersIDs.MID" :key="index" 
           v-bind:player="players[player]"
-          v-bind:expanded="false">
+          v-bind:expanded="false"
+          v-bind:editFavorite="false">
           </PlayersItem>
       </div>
       <!-- ATT column -->
@@ -38,7 +41,8 @@
           <PlayersItem v-bind:style="{ color: '#cdcf32'}" 
           v-for="(player, index) in sortedPlayersIDs.ATT" :key="index" 
           v-bind:player="players[player]"
-          v-bind:expanded="false">
+          v-bind:expanded="false"
+          v-bind:editFavorite="false">
           </PlayersItem>
       </div>
     </div>

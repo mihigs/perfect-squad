@@ -2,6 +2,7 @@ export default {
     status: 0,
     players: [],
     formations: {},
+    favoritePlayers: [],
 
     //holds players IDs, sorted by position
     sortedPlayersIDs: {

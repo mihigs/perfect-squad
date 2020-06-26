@@ -12,7 +12,11 @@ export default {
             state.players.push(player);
             
             //adds the array for future ratings
-            player.rating = [];
+            player.ratings = [];
+            player.rating = 0;
+
+            //adds the boolean for seleced as favorite
+            player.favorite = false;
 
             //calculates and adds the age to the player data
             let today = new Date();
@@ -44,11 +48,11 @@ export default {
         //we need to parse formation data so it can be displayed by the UI dynamically
         let tempParsedFormation = [];
         tempParsedFormation = state.selectedFormation.formation.split('-');
-        //parses string to numbers
+        //parses string formation to numbers
         tempParsedFormation.forEach((position, index) => {
             tempParsedFormation[index] = parseInt(position);
         });
-        //if the DEF has more players, we shift some forward
+        //if the DEF has more players, shift some forward
         if(tempParsedFormation[0] > 2){
             tempParsedFormation.unshift(2);
             tempParsedFormation[1] -= 2;
@@ -59,20 +63,33 @@ export default {
             tempParsedFormation[0] = tempParsedFormation[1];
             tempParsedFormation[1] = temp;
         }
-        //if the MID has more players, we shift some forward
+        //if the MID has more players, shift some forward
         if(tempParsedFormation[2] >= 4){
             tempParsedFormation[2] -= 2;
             tempParsedFormation.splice(3, 0, 2);
         }
         //makes ATK look better
-        if(tempParsedFormation.length < 5 && tempParsedFormation[3] > 2){
-            tempParsedFormation.push(1);
-            tempParsedFormation[3] -= 1;
+        // if(tempParsedFormation.length < 5 && tempParsedFormation[3] > 2){
+        //     tempParsedFormation.push(1);
+        //     tempParsedFormation[3] -= 1;
+        // }
+        if(tempParsedFormation.length < 5 && tempParsedFormation[2] > 2){
+            tempParsedFormation[4] = tempParsedFormation[3];
+            tempParsedFormation[3] = 0;
         }
-        //saves the parsed formation to state
+        //saves all the parsed formation to state
         state.selectedFormation.parsedFormation = tempParsedFormation;
     },
     savePlayerRating(state, { rating, playerID }){
-        state.players[playerID].rating.push(rating);
+        state.players[playerID].ratings.push(rating);
+        state.players[playerID].rating = state.players[playerID].ratings.reduce((a, b) => a + b) / state.players[playerID].ratings.length;
     },
+    toggleFavorite(state, {playerID}){
+        //toggles player favorite status
+        state.players[playerID].favorite = !state.players[playerID].favorite;
+        //adds or removes the player from the favorites list
+        if(state.players[playerID].favorite)
+            state.favoritePlayers.push(state.players[playerID]);
+        else state.favoritePlayers = state.favoritePlayers.filter(player => player.ID !== playerID);
+    }
 }
