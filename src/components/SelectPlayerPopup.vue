@@ -1,10 +1,10 @@
 <template>
-  <div class="select-player-popup-container">
+  <div class="select-player-popup-container" @click.stop="closePopup()">
       <div class="position-name">{{exactPosition}}</div>
       <div class="sort-bar">
-        <div class="sort-option" v-bind:class="{active: sortedBy === 0}" @click="sortByPopularity()">Popularity</div>
-        <div class="sort-option" v-bind:class="{active: sortedBy === 1}" @click="sortByValue()">Value</div>
-        <div class="sort-option" v-bind:class="{active: sortedBy === 2}" @click="sortByAge()">Age</div>
+        <div class="sort-option" v-bind:class="{active: sortedBy === 0}" @click.stop="sortByPopularity()">Popularity</div>
+        <div class="sort-option" v-bind:class="{active: sortedBy === 1}" @click.stop="sortByValue()">Value</div>
+        <div class="sort-option" v-bind:class="{active: sortedBy === 2}" @click.stop="sortByAge()">Age</div>
       </div>
       <div class="menu-container">
           <div class="players-item-container" v-for="player in players" :key="player.ID">
@@ -12,8 +12,10 @@
             v-bind:player="player"
             v-bind:expanded="true"
             v-bind:editFavorite="true"
+            v-bind:toggleableDetails="false"
             @closePopup="closePopup($event)"
-            @removeSelectedPlayer="removeSelectedPlayer()">
+            @removeSelectedPlayer="removeSelectedPlayer()"
+            v-bind:playerPosition="generalPosition">
             </PlayersItem>
           </div>
       </div>
@@ -37,7 +39,8 @@ export default {
     },
     methods: {
         closePopup: function(event){
-            this.$emit('closePopup', {playerID: event.playerID});
+            if(event) this.$emit('closePopup', {playerID: event.playerID});
+            else this.$emit('closePopup')
         },
         removeSelectedPlayer: function(){
             this.$emit('removeSelectedPlayer');
@@ -56,6 +59,11 @@ export default {
             this.players = this.players = this.players.sort(function(a, b){ return a.stats.age - b.stats.age });
             this.sortedBy = 2;
         },
+        handleScrolling: function(event){
+            console.log('sth');
+            event;
+            //console.log(window.scrollBy);
+        },
     },
     created(){
         //always puts the current favorite player for this position on the beggining
@@ -72,22 +80,28 @@ export default {
         });
         //sorts the players by popularity by default
         this.sortByPopularity();
-
+    },
+    mounted(){
         //listens for scrolling, used to scroll elements horizontally
-        // document.addEventListener('')
+        //REMOVE THE EVENT LISTENER
+        this.$el.addEventListener('wheel', e => {
+            this.$el.lastElementChild.scrollBy(e.deltaY*(0.4), 0);
+        })
     },
 }
 </script>
 
 <style lang="scss">
     .select-player-popup-container{
-        background-color: darkgray;
+        background-image: url('../assets/stadium.jpg');
+        background-size: cover;
+        background-position: center;
         width: 100%;
         height: 95vh;
         position: absolute;
         bottom: 0px;
         left: 0px;
-        z-index: 1;
+        z-index: 2;
         cursor: default;
 
         .position-name{
@@ -124,6 +138,10 @@ export default {
             display: flex;
             overflow-y: hidden;
             overflow-x: scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
             .players-item-container{
                 height: 100%;
                 flex: 0 0 23%;

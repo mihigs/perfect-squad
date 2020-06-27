@@ -7,42 +7,48 @@
       <div class="players-category-column">
         <div class="players-category-bar-button" id="category-GK">GK</div>
           <PlayersItem 
-          v-bind:style="{ color: '#54688e'}" 
           v-for="(player, index) in sortedPlayersIDs.GK" :key="index" 
           v-bind:player="players[player]"
           v-bind:expanded="false"
-          v-bind:editFavorite="false">
+          v-bind:editFavorite="false"
+          v-bind:toggleableDetails="true"
+          v-bind:playerPosition="'GK'">
           </PlayersItem>
       </div>
       <!-- DEF column -->
       <div class="players-category-column">
         <div class="players-category-bar-button">DEF</div>
           <PlayersItem
-          v-bind:style="{ color: '#4e202c'}" 
           v-for="(player, index) in sortedPlayersIDs.DEF" :key="index" 
           v-bind:player="players[player]"
           v-bind:expanded="false"
-          v-bind:editFavorite="false">
+          v-bind:editFavorite="false"
+          v-bind:toggleableDetails="true"
+          v-bind:playerPosition="'DEF'">
           </PlayersItem>
       </div>
       <!-- MID column -->
       <div class="players-category-column">
         <div class="players-category-bar-button">MID</div>
-          <PlayersItem v-bind:style="{ color: '#0b8227'}" 
+          <PlayersItem 
           v-for="(player, index) in sortedPlayersIDs.MID" :key="index" 
           v-bind:player="players[player]"
           v-bind:expanded="false"
-          v-bind:editFavorite="false">
+          v-bind:editFavorite="false"
+          v-bind:toggleableDetails="true"
+          v-bind:playerPosition="'MID'">
           </PlayersItem>
       </div>
       <!-- ATT column -->
       <div class="players-category-column">
         <div class="players-category-bar-button">ATT</div>
-          <PlayersItem v-bind:style="{ color: '#cdcf32'}" 
+          <PlayersItem 
           v-for="(player, index) in sortedPlayersIDs.ATT" :key="index" 
           v-bind:player="players[player]"
           v-bind:expanded="false"
-          v-bind:editFavorite="false">
+          v-bind:editFavorite="false"
+          v-bind:toggleableDetails="true"
+          v-bind:playerPosition="'ATT'">
           </PlayersItem>
       </div>
     </div>

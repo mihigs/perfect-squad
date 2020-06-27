@@ -1,6 +1,6 @@
 <template>
   <div class="player-circle" @click="openPlayerSelectPopup()">
-      <div class="formation-picture-background" v-if="selectedPlayer">
+      <div class="formation-picture-background" v-show="selectedPlayer">
         <div class="formation-picture" :style="{ backgroundImage: `url(${selectedPlayer.formationPicture}`}"></div>
       </div>
       <div class="player-last-name">{{selectedPlayer.lastName ? selectedPlayer.lastName : selectedPlayer.name}}</div>

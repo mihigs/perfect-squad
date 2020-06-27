@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="players-item">
-          <div class="players-item-bar" @click="expandPlayer()">
+          <div class="players-item-bar" @click.stop="expandPlayer()">
             <FavoritesHeart v-bind:toggleable="editFavorite" v-bind:toggled="player.favorite" @toggleFavorite="toggleFavorite($event)"></FavoritesHeart>
             <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
-            <div class="players-item-position">{{player.stats.position}}</div>
+            <div class="players-item-position" :style="{ color: `${positionColor}` }">{{player.stats.position}}</div>
           </div>
           <transition>
-            <div class="players-expanded" v-show="playerExpanded" @click="showDetails()">
+            <div class="players-expanded" v-show="playerExpanded" @click.stop="showDetails()">
               <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
               <div class="players-item-bottom">
                 <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
@@ -16,7 +16,7 @@
             </div>
           </transition>
     </div>
-      <PlayersDetailsPopup v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
+      <PlayersDetailsPopup v-if="toggleableDetails" v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ import FavoritesHeart from './FavoritesHeart'
 
 export default {
     name: 'PlayersItem',
-    props: ['player', 'expanded', 'editFavorite'], 
+    props: ['player', 'expanded', 'editFavorite', 'toggleableDetails', 'playerPosition'], 
     components: {
       PlayersDetailsPopup,
       FavoritesHeart,
@@ -57,6 +57,19 @@ export default {
     },
     created(){
       this.playerExpanded = this.expanded;
+    },
+    computed: {
+      positionColor: function(){
+        let color = '';
+        switch (this.playerPosition) {
+          case 'GK': color = '#54688e'; break;
+          case 'DEF': color = '#4e202c'; break;
+          case 'MID': color = '#0b8227'; break;
+          case 'ATT': color = '#cdcf32'; break;
+          default: color = '#00000';
+        }
+        return color;
+      },
     },
 }
 </script>
