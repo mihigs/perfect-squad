@@ -67,13 +67,11 @@ export default {
         color: #f09e00;
     }
     .dropdown-container{
-        /* provjeriti */
         position: relative;
-        z-index: -2;
     }
     .dropdown-item{
         text-align: center;
-        background-color: olivedrab;
+        background-color: #253e02;
         width: 100%;
         height: 50px;
         line-height: 250%;

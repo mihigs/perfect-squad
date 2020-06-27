@@ -30,13 +30,14 @@ export default {
 
         width: 100%;
         height: 5vh;
-        background-color: olivedrab;
+        background-color: #253e02;
         box-shadow: 0px 2px 2px 0
         rgba(0,0,0,0.3);
         color: white;
 
         position: fixed;
         top: 0;
+        z-index: 4;
     }
     .navbar-logo{
         font-weight: bold;
