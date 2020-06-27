@@ -6,15 +6,13 @@
             <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
             <div class="players-item-position" :style="{ color: `${positionColor}` }">{{player.stats.position}}</div>
           </div>
-          <transition>
-            <div class="players-expanded" v-show="playerExpanded" @click.stop="showDetails()">
+            <div class="players-expanded" :class="{active: playerExpanded}" @click.stop="showDetails()">
               <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
-              <div class="players-item-bottom">
+              <div class="players-item-bottom" :class="{active: playerExpanded}">
                 <div :style="{ backgroundImage: `url(${player.teamCrest}`}" class="players-item-club-icon"></div>
                 <div class="players-item-club-name">{{player.stats.club}}</div>
               </div>
             </div>
-          </transition>
     </div>
       <PlayersDetailsPopup v-if="toggleableDetails" v-bind:detailsOpen="detailsOpen" v-bind:player="player" @closePopup="hideDetails"></PlayersDetailsPopup>
   </div>
@@ -74,7 +72,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .players-item{
     width: 95%;
     margin: auto;
@@ -106,13 +104,18 @@ export default {
       font-size: 90%;
       color: rgb(37, 48, 48);
   }
-  .players-expanded{
-    width: 100%;
-    height: 88%;
-  }
+    .players-expanded{
+      width: 100%;
+      height: 0px;
+      transition: height .3s;
+      &.active{
+        height: 300px;
+        transition: height .3s;
+      }
+    }
   .players-item-image{
     width: 100%;
-    height: 250px;
+    height: 85%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
@@ -121,11 +124,15 @@ export default {
       float: right;
       width: 18%;
   }
-  .players-item-bottom{
-    height: 12%;
-    padding-top: 1.3%;
-    line-height: 250%;
-  }
+    .players-item-bottom{
+      display: none;
+      height: 12%;
+      padding-top: 1.3%;
+      line-height: 250%;
+      &.active{
+        display: block;
+      }
+    }
   .players-item-club-icon{
     float: left;
     height: 35px;

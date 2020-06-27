@@ -34,10 +34,11 @@ export default {
     .heart-container{
         float: left;
         margin-left: 4%;
+        margin-top: 2%;
     }
     .heart {
         fill: #9E9C9C;
-        width: 15px;
+        width: 25px;
         &.active{
             fill: red;
             animation: fillIn 0.2s ease;

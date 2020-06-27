@@ -19,6 +19,11 @@ export default {
     components:{
         FormationDropdown,
     },
+    data(){
+        return{
+
+        }
+    },
 }
 </script>
 
@@ -42,7 +47,7 @@ export default {
     .navbar-logo{
         font-weight: bold;
         line-height: 50%;
-        color: white;
+        color: white !important;
         text-decoration: none;
     }
     .navbar-menu{
@@ -57,6 +62,9 @@ export default {
         /* cekirat marginu ovdje */
     }
     .navbar-menu-item:hover{
+        color: #f09e00;
+    }
+    .router-link-active{
         color: #f09e00;
     }
 </style>

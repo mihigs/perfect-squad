@@ -43,7 +43,7 @@
                     <div class="skill-progress-container" v-for="(specificSkill, index) in playerSkill.skills" :key="index">
                         <div class="progress-name"> {{capitaliseString(specificSkill.name)}}</div>
                             <div class="progress-bar-container">
-                                <div class="progress-bar" :style="{width: `${specificSkill.value}%`}"></div>
+                                <div class="progress-bar" :style="{width: `${specificSkill.value ? specificSkill.value : 100}%`}"></div>
                             </div>  
                             <div class="progress-amount">{{specificSkill.value}}</div>           
                     </div>     
