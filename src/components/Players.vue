@@ -112,6 +112,7 @@ export default {
     text-align: center;
     line-height: 200%;
     font-weight: bold;
+    box-shadow: 0px 2px 4.9px 0.1px rgba(0, 0, 0, 0.4);
   }
   #category-GK{
     border-left: none;

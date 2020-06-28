@@ -74,6 +74,7 @@ export default {
         background-color: #253e02;
         height: 350px;
         overflow: hidden;
+        box-shadow: 0px 2px 4.9px 0.1px rgba(0, 0, 0, 0.4);
         .dropdown-item{
             text-align: center;
             background-color: #253e02;

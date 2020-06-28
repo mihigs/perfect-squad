@@ -88,6 +88,7 @@ export default {
         border: 2px solid rgb(32, 32, 32);
         align-self: flex-end;
         cursor: pointer;
+        box-shadow: 0px 2px 4.9px 0.1px rgba(0, 0, 0, 0.4);
 
         .formation-picture-background{
             position: relative;

@@ -94,6 +94,7 @@ export default {
     font-weight: bold;
     font-size: 90%;
     cursor: pointer;
+    box-shadow: 0px 2px 4.9px 0.1px rgba(0, 0, 0, 0.4);
   }
   .players-item:hover{
     background-color: rgb(190, 190, 190);
@@ -106,6 +107,7 @@ export default {
   }
   .players-item-bar{
     height: 12%;
+    box-shadow: 0px 2px 4.9px 0.1px rgba(0, 0, 0, 0.4);
   }
   .players-item-name{
       display: inline;

@@ -9,9 +9,9 @@
                 <router-link to="/players" class="menu-item">Players</router-link>
             </div>
             <div @click="()=>{menuOpen = !menuOpen}">
-                <router-link to="/favorites" class="menu-item">Favorites</router-link>
+                <router-link to="/favorites" class="menu-item" id="favorites">Favorites</router-link>
             </div>
-            <FormationDropdown class="dropdown"></FormationDropdown>
+            <FormationDropdown class="dropdown" id="dropdown"></FormationDropdown>
         </div>
   </div>
 </template>
@@ -41,6 +41,7 @@ export default {
         width: 100%;
         height: 5vh;
         background-color: #253e02;
+        border-bottom: 1px solid #253e02;
         box-shadow: 0px 2px 2px 0
         rgba(0,0,0,0.3);
         color: white;
@@ -96,17 +97,17 @@ export default {
         }
     }
         .menu{
-            overflow: hidden;
             height: 0;
             width: 100%;
             position: absolute;
             top: 7vh;
-            transition: height .3s;
             background-color: #213802;
             display: block;
             &.active{
                 width: 100%;
-                height: 123px;
+                .menu-item, .dropdown{
+                    transform: translateY(0px);
+                }
             }
             .menu-item, .dropdown{
                 border-bottom: 1px solid rgb(36, 36, 36);
@@ -115,6 +116,14 @@ export default {
                 text-align: center;
                 height: 40px;
                 display: block;
+                transition: all .3s;
+                transform: translateX(100%);
+            }
+            #favorites{
+                transition-delay: .1s;
+            }
+            #dropdown{
+                transition-delay: .2s;
             }
         }
     }

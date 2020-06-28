@@ -132,7 +132,7 @@ export default {
     .pop-enter-active{
         transition: all 500ms;
     }
-    
+
     .details-basic-info{
         box-sizing: border-box;
         width: 50%;
@@ -234,7 +234,7 @@ export default {
                     height: 4px;
                     width: 0px;
                     transition: all 2s ease-in-out;
-                    background-color: green;
+                    background-color: #21723a;
                 }
             }
         }

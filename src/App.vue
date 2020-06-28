@@ -34,7 +34,7 @@ export default {
     margin-top: 5vh;
   }
 
-   @media only screen and (max-width: 425px){
+   @media only screen and (max-width: 768px){
      .main-container{
        margin-top: 7vh;
      }

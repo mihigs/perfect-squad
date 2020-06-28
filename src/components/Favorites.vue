@@ -62,6 +62,7 @@ export default {
           position: absolute;
           right: 0;
           bottom: 5%;
+          box-shadow: 0px 2px 4.9px 0.1px rgba(0, 0, 0, 0.4);
         }
         .menu-container{
           max-width: 80%;
