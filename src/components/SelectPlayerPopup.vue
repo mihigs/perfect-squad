@@ -129,6 +129,9 @@ export default {
                 &.active{
                     color: #808080;
                 }
+                &:hover{
+                    color: #8f8f8f;
+                }
             }
         }
         .menu-container{
@@ -145,6 +148,22 @@ export default {
             .players-item-container{
                 height: 100%;
                 flex: 0 0 23%;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 425px){
+        .select-player-popup-container{
+            height: 93vh;
+            .menu-container{
+                overflow: scroll;
+                width: 80%;
+                height: 100%;
+                flex-direction: column;
+                .players-item-container{
+                    width: 100%;
+
+                }
             }
         }
     }

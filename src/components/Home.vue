@@ -6,7 +6,7 @@
           <div v-show="selectedFormation.id !== -1" class="field-UI-container">
               <!-- ATK ROW -->
             <div class="field-row inner">
-                <PlayerCircle v-for="index in selectedFormation.parsedFormation[4]" :key="index" 
+                <PlayerCircle v-for="index in selectedFormation.parsedFormation[4]" :key="index"
                 v-bind:generalPosition="'ATT'"
                 v-bind:playerWing="index"
                 v-bind:playersInRow="selectedFormation.parsedFormation[4]"
@@ -15,7 +15,7 @@
             </div>
             <!-- MID ROWs -->
             <div class="field-row">
-                <PlayerCircle v-for="index in selectedFormation.parsedFormation[3]" :key="index" 
+                <PlayerCircle v-for="index in selectedFormation.parsedFormation[3]" :key="index"
                 v-bind:generalPosition="'MID'"
                 v-bind:playerWing="index"
                 v-bind:playersInRow="selectedFormation.parsedFormation[3]"
@@ -23,7 +23,7 @@
                 </PlayerCircle>
             </div>
             <div class="field-row">
-                <PlayerCircle v-for="index in selectedFormation.parsedFormation[2]" :key="index" 
+                <PlayerCircle v-for="index in selectedFormation.parsedFormation[2]" :key="index"
                 v-bind:generalPosition="'MID'"
                 v-bind:playerWing="index"
                 v-bind:playersInRow="selectedFormation.parsedFormation[2]"
@@ -32,7 +32,7 @@
             </div>
             <!-- DEF ROWS -->
             <div class="field-row outer">
-                <PlayerCircle v-for="index in selectedFormation.parsedFormation[1]" :key="index" 
+                <PlayerCircle v-for="index in selectedFormation.parsedFormation[1]" :key="index"
                 v-bind:generalPosition="'DEF'"
                 v-bind:playerWing="index"
                 v-bind:playersInRow="selectedFormation.parsedFormation[1]"
@@ -40,7 +40,7 @@
                 </PlayerCircle>
             </div>
             <div class="field-row inner">
-                <PlayerCircle v-for="index in selectedFormation.parsedFormation[0]" :key="index" 
+                <PlayerCircle v-for="index in selectedFormation.parsedFormation[0]" :key="index"
                 v-bind:generalPosition="'DEF'"
                 v-bind:playerWing="index"
                 v-bind:playersInRow="selectedFormation.parsedFormation[0]"
@@ -72,7 +72,7 @@ export default {
     },
     created(){
         //hide or show goalkeeper circle, depending on if a formation was selected
-        this.showGK = this.$store.getters.selectedFormation.id !== -1 ? true : false; 
+        this.showGK = this.$store.getters.selectedFormation.id !== -1 ? true : false;
         //watches for change in formation selection
         this.$store.watch(
             ()=>{ return this.$store.getters.selectedFormation.id },
@@ -134,5 +134,32 @@ export default {
 
         display: flex;
         justify-content: space-around;
+    }
+
+    @media only screen and (max-width: 425px){
+        .home-safe-space{
+            height: 1vh;
+        }
+        .field-container{
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+    @media only screen and (max-width: 375px){
+        .home-safe-space{
+            height: 4vh;
+        }
+        .field-container{
+            height: 90%;
+        }
+    }
+    @media only screen and (max-width: 320px){
+        .home-safe-space{
+            height: 10vh;
+        }
+        .field-container{
+            height: 80%;
+        }
     }
 </style>

@@ -33,4 +33,10 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 5vh;
   }
+
+   @media only screen and (max-width: 425px){
+     .main-container{
+       margin-top: 7vh;
+     }
+   }
 </style>

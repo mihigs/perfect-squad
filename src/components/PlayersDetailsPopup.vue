@@ -4,6 +4,7 @@
     <div class="popup-background-fade" @click="closePopup" v-show="detailsOpen">
     </div>
     <!-- Popup container -->
+    <transition name="pop">
     <div class="details-popup-container" v-show="detailsOpen">
 
         <!-- Left side -->
@@ -50,6 +51,7 @@
             </div>
         </div>
     </div>
+    </transition>
 </div>
 </template>
 
@@ -116,6 +118,19 @@ export default {
         rgba(0,0,0,0.3);
         padding: 2%;
         color: rgb(37, 48, 48);
+    }
+    //transition classes
+    .pop-leave{
+        transform: translateY(0px);
+    }
+    .pop-leave-to, .pop-enter{
+        transform: translateY(700px);
+    }
+    .pop-leave-active{
+        transition: all 300ms;
+    }
+    .pop-enter-active{
+        transition: all 500ms;
     }
     .details-basic-info{
         box-sizing: border-box;
@@ -220,6 +235,32 @@ export default {
                     transition: all 2s ease-in-out;
                     background-color: green;
                 }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 425px){
+        .details-popup-container{
+            width: 100%;
+            height: 93vh;
+            top: 7vh;
+            left: 0px;
+            padding: 2% 0 0 0;
+            overflow: scroll;
+        }
+        .details-basic-info{
+            width: 100%;
+            float: none;
+        }
+        .details-stats-info{
+            width: 100%;
+            float: none;
+            background-color: gainsboro;
+            border: none;
+            margin: 0;
+            overflow: auto;
+            &::-webkit-scrollbar {
+                display: none;
             }
         }
     }

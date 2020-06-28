@@ -78,7 +78,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .players-main-container{
     width: 100%;
     height: 95vh;
@@ -88,6 +88,9 @@ export default {
     background-repeat: no-repeat;
     overflow: scroll;
     overflow-x: hidden;
+    &::-webkit-scrollbar {
+          display: none;
+      }
   }
   .players-secondary-container{
     width: 90%;
@@ -112,6 +115,13 @@ export default {
   }
   #category-GK{
     border-left: none;
+  }
+
+  @media only screen and (max-width: 425px){
+    .players-category-column{
+      float: none;
+      width: 100%;
+    }
   }
   
 </style>

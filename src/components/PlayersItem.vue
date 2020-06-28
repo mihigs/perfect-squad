@@ -88,9 +88,6 @@ export default {
     background-color: rgb(190, 190, 190);
   }
   .players-item-favorite-icon{
-      background-image: url('../assets/favorite-heart-empty.svg');
-      background-position: center;
-      background-repeat: no-repeat;
       float: left;
       margin-top: 2%;
       height: 25px;
@@ -110,6 +107,7 @@ export default {
       transition: height .3s;
       &.active{
         height: 300px;
+        //??
         transition: height .3s;
       }
     }

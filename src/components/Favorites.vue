@@ -6,8 +6,7 @@
             v-bind:player="player"
             v-bind:expanded="true"
             v-bind:editFavorite="false"
-            v-bind:toggleableDetails="true"
-            v-bind:playerPosition="generalPosition">
+            v-bind:toggleableDetails="true">
             </PlayersItem>
           </div>
       </div>

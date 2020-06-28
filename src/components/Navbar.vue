@@ -1,13 +1,18 @@
 <template>
   <div class="navbar">
-      <router-link to="/home" class="navbar-logo">
+      <router-link to="/home" class="logo">
         <p>Perfect Squad</p>
       </router-link>
-      <div class="navbar-menu">
-        <router-link to="/players" class="navbar-menu-item">Players</router-link>
-        <router-link to="/favorites" class="navbar-menu-item">Favorites</router-link>
-        <FormationDropdown></FormationDropdown>
-      </div>
+    <div class="hamburger" @click.self="()=>{menuOpen = !menuOpen}"></div>
+        <div class="menu" :class="{active: menuOpen}">
+            <div @click="()=>{menuOpen = !menuOpen}">
+                <router-link to="/players" class="menu-item">Players</router-link>
+            </div>
+            <div @click="()=>{menuOpen = !menuOpen}">
+                <router-link to="/favorites" class="menu-item">Favorites</router-link>
+            </div>
+            <FormationDropdown class="dropdown"></FormationDropdown>
+        </div>
   </div>
 </template>
 
@@ -21,13 +26,13 @@ export default {
     },
     data(){
         return{
-
+            menuOpen: false,
         }
     },
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .navbar{
         display: flex;
         flex-direction: row;
@@ -43,28 +48,71 @@ export default {
         position: fixed;
         top: 0;
         z-index: 4;
+
+        .logo{
+            font-weight: bold;
+            line-height: 50%;
+            color: white !important;
+            text-decoration: none;
+            &:hover{
+                color: #f09e00 !important;
+            }
+        }
+        .menu{
+            display: flex;
+            align-content: flex-end;
+
+            .menu-item{
+                margin-left: 25px;
+                line-height: 250%;
+                color: white;
+                text-decoration: none;
+                &:hover{
+                    color: #f09e00;
+                }
+            }
+            .router-link-active{
+                color: #f09e00;
+            }
+        }
     }
-    .navbar-logo{
-        font-weight: bold;
-        line-height: 50%;
-        color: white !important;
-        text-decoration: none;
+
+    @media only screen and (max-width: 425px) {
+    .navbar{
+        height: 7vh;
+        justify-content: space-between;
+    .logo{
+        margin: 1% 0 0 5%;
     }
-    .navbar-menu{
-        display: flex;
-        align-content: flex-end;
+    .hamburger{
+        width: 35px;
+        height: 35px;
+        margin: 1.5% 8% 0 0;
+        background: url('../assets/hamburger_icon.png') no-repeat;
+        background-size: contain;
     }
-    .navbar-menu-item{
-        margin-left: 25px;
-        line-height: 250%;
-        color: white;
-        text-decoration: none;
-        /* cekirat marginu ovdje */
+        .menu{
+            display: none;
+            &.active{
+                width: 100%;
+                display: block;
+                position: absolute;
+                top: 7vh;
+                background-color: #213802;
+                .menu-item, .dropdown{
+                    text-align: center;
+                    margin: 0;
+                    display: block;
+                    background-color: #213802;
+                    height: 40px;
+                    border-bottom: 1px solid rgb(36, 36, 36);
+                }
+            }
+            .menu-item, .dropdown{
+                display: none;
+                height: 0px;
+            }
+        }
     }
-    .navbar-menu-item:hover{
-        color: #f09e00;
-    }
-    .router-link-active{
-        color: #f09e00;
-    }
+}
 </style>

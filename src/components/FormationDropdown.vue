@@ -80,4 +80,10 @@ export default {
     .dropdown-item:hover{
         color: #f09e00;
     }
+
+    @media only screen and (max-width: 425px){
+        .dropdown-button{
+            width: 100%;
+        }
+    }
 </style>
