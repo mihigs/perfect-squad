@@ -48,4 +48,11 @@ export default {
         0% { transform: scale(1); }
         100% { transform: scale(1.5); }
     }
+
+    @media only screen and (max-width: 1152px){
+    .heart-container{
+        margin-left: 4%;
+        margin-top: 1%;
+    }
+  }
 </style>

@@ -65,7 +65,7 @@ export default {
         }
         .menu-container{
           max-width: 80%;
-          height: 50%;
+          height: 100%;
           padding-top: 10%;
           margin-left: 10%;
           display: flex;
@@ -81,5 +81,22 @@ export default {
                 flex: 0 0 23%;
             }
         }
+  }
+
+  @media only screen and (max-width: 768px){
+      .favorites-main-container{
+        .menu-container{
+          flex-direction: column;
+          height: 100%;
+          overflow-x: none;
+          overflow-y: scroll;
+          .players-item-container{
+            flex: 0 0 70%;
+          }
+        }
+        .message{
+          width: 40%;
+        }
+      }
   }
 </style>

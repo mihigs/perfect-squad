@@ -52,9 +52,20 @@ export default {
         if(event.addedToFavorites) this.$emit('closePopup', {playerID: this.player.ID});
         else if(!event.addedToFavorites) this.$emit('removeSelectedPlayer');
       },
+      handleDetailsNavigation: function(next){
+        if(this.detailsOpen){
+          this.detailsOpen = false;
+          next(false);
+        }else 
+          next()
+      }
     },
     created(){
       this.playerExpanded = this.expanded;
+      //listens for "back" keypress or change in route to close the details menu, mostly for mobile
+        this.$router.beforeEach((to, from, next)=>{
+            this.handleDetailsNavigation(next);
+        })
     },
     computed: {
       positionColor: function(){
@@ -142,5 +153,24 @@ export default {
   .players-item-club-name{
     text-align: left;
     color: rgb(37, 48, 48);
+  }
+
+  
+  @media only screen and (max-width: 1152px){
+    .players-item{
+      font-size: 85%;
+    }
+    .players-item-name{
+      font-size: 75%;
+    }
+  }
+  @media only screen and (max-width: 768px){
+    .players-item-name{
+      font-size: 120%;
+    }
+    .players-item-position{
+      width: 10%;
+      font-size: 120%;
+    }
   }
 </style>

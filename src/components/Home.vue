@@ -138,28 +138,23 @@ export default {
 
     @media only screen and (max-width: 425px){
         .home-safe-space{
-            height: 1vh;
+            height: 6vh;
         }
         .field-container{
             width: 100%;
-            height: 100%;
         }
-
     }
     @media only screen and (max-width: 375px){
         .home-safe-space{
-            height: 4vh;
+            height: 2vh;
         }
         .field-container{
             height: 90%;
         }
     }
     @media only screen and (max-width: 320px){
-        .home-safe-space{
-            height: 10vh;
-        }
         .field-container{
-            height: 80%;
+            height: 60%;
         }
     }
 </style>

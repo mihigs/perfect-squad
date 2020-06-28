@@ -117,10 +117,21 @@ export default {
     border-left: none;
   }
 
-  @media only screen and (max-width: 425px){
+  @media only screen and (max-width: 768px){
     .players-category-column{
       float: none;
       width: 100%;
+    }
+    .players-secondary-container{
+      width: 100%;
+      padding-bottom: 10%;
+    }
+    .players-category-bar-button{
+      border: none;
+      background-color: rgb(179, 179, 179);
+    }
+    .players-item{
+      width: 90%;
     }
   }
   

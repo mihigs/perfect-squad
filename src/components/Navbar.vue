@@ -3,7 +3,7 @@
       <router-link to="/home" class="logo">
         <p>Perfect Squad</p>
       </router-link>
-    <div class="hamburger" @click.self="()=>{menuOpen = !menuOpen}"></div>
+    <div class="hamburger" @click.self="()=>{menuOpen = !menuOpen}" :class="{active: menuOpen}"></div>
         <div class="menu" :class="{active: menuOpen}">
             <div @click="()=>{menuOpen = !menuOpen}">
                 <router-link to="/players" class="menu-item">Players</router-link>
@@ -77,7 +77,7 @@ export default {
         }
     }
 
-    @media only screen and (max-width: 425px) {
+    @media only screen and (max-width: 768px) {
     .navbar{
         height: 7vh;
         justify-content: space-between;
@@ -90,27 +90,31 @@ export default {
         margin: 1.5% 8% 0 0;
         background: url('../assets/hamburger_icon.png') no-repeat;
         background-size: contain;
+        transition: all .3s;
+        &.active{
+            transform: rotateX(180deg);
+        }
     }
         .menu{
-            display: none;
+            overflow: hidden;
+            height: 0;
+            width: 100%;
+            position: absolute;
+            top: 7vh;
+            transition: height .3s;
+            background-color: #213802;
+            display: block;
             &.active{
                 width: 100%;
-                display: block;
-                position: absolute;
-                top: 7vh;
-                background-color: #213802;
-                .menu-item, .dropdown{
-                    text-align: center;
-                    margin: 0;
-                    display: block;
-                    background-color: #213802;
-                    height: 40px;
-                    border-bottom: 1px solid rgb(36, 36, 36);
-                }
+                height: 123px;
             }
             .menu-item, .dropdown{
-                display: none;
-                height: 0px;
+                border-bottom: 1px solid rgb(36, 36, 36);
+                margin: 0;
+                background-color: #213802;
+                text-align: center;
+                height: 40px;
+                display: block;
             }
         }
     }

@@ -86,7 +86,7 @@ export default {
         //REMOVE THE EVENT LISTENER
         this.$el.addEventListener('wheel', e => {
             this.$el.lastElementChild.scrollBy(e.deltaY*(0.4), 0);
-        })
+        });
     },
 }
 </script>
@@ -136,7 +136,7 @@ export default {
         }
         .menu-container{
             width: 90%;
-            height: 50%;
+            height: 100%;
             margin: 10% 0 0 10%;
             display: flex;
             overflow-y: hidden;
@@ -152,17 +152,19 @@ export default {
         }
     }
 
-    @media only screen and (max-width: 425px){
+    @media only screen and (max-width: 768px){
         .select-player-popup-container{
             height: 93vh;
             .menu-container{
+                margin-top: 0;
+                padding-top: 10%;
                 overflow: scroll;
                 width: 80%;
                 height: 100%;
                 flex-direction: column;
                 .players-item-container{
-                    width: 100%;
-
+                    height: 50%;
+                    margin-bottom: 10%;
                 }
             }
         }

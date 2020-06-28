@@ -3,11 +3,13 @@
         <div class="dropdown-button" @click="toggleDropdown()">
             Formation: {{selectedFormation}}
         </div>
-        <div class="dropdown-container" v-if="showDropdown">
-            <div class="dropdown-item" v-for="(formation, index) in formations" :key="index" @click="selectFormation(formation, index)">
-                {{formation}}
+        <transition name="dropdown">
+            <div class="dropdown-container" v-if="showDropdown">
+                <div class="dropdown-item" v-for="(formation, index) in formations" :key="index" @click="selectFormation(formation, index)">
+                    {{formation}}
+                </div>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -54,7 +56,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     .dropdown-button{
         margin-left: 10px;
         line-height: 250%;
@@ -62,26 +64,46 @@ export default {
         width: 175px;
         text-align: center;
         cursor: pointer;
-    }
-    .dropdown-button:hover{
-        color: #f09e00;
+
+        &:hover{
+            color: #f09e00;
+        }
     }
     .dropdown-container{
         position: relative;
-    }
-    .dropdown-item{
-        text-align: center;
         background-color: #253e02;
-        width: 100%;
-        height: 50px;
-        line-height: 250%;
-        cursor: pointer;
+        height: 350px;
+        overflow: hidden;
+        .dropdown-item{
+            text-align: center;
+            background-color: #253e02;
+            width: 100%;
+            height: 50px;
+            line-height: 300%;
+            cursor: pointer;
+            border-bottom: 1px solid rgb(39, 39, 39);
+
+            &:hover{
+                color: #f09e00;
+            }
+        }
     }
-    .dropdown-item:hover{
-        color: #f09e00;
+    
+    //transition classes
+    .dropdown-leave{
+        height: 350px;
+    }
+    .dropdown-leave-to, .dropdown-enter{
+        height: 0px;
+    }
+    .dropdown-leave-active{
+        transition: all 400ms;
+    }
+    .dropdown-enter-active{
+        transition: all 200ms;
     }
 
-    @media only screen and (max-width: 425px){
+    @media only screen and (max-width: 768px){
         .dropdown-button{
             width: 100%;
         }

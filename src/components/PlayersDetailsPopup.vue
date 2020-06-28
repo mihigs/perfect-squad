@@ -132,6 +132,7 @@ export default {
     .pop-enter-active{
         transition: all 500ms;
     }
+    
     .details-basic-info{
         box-sizing: border-box;
         width: 50%;
@@ -239,18 +240,21 @@ export default {
         }
     }
 
-    @media only screen and (max-width: 425px){
+    @media only screen and (max-width: 768px){
         .details-popup-container{
             width: 100%;
-            height: 93vh;
-            top: 7vh;
+            height: 100vh;
+            top: 0vh;
             left: 0px;
             padding: 2% 0 0 0;
             overflow: scroll;
+            box-shadow: none;
+            z-index: 4;
         }
         .details-basic-info{
             width: 100%;
             float: none;
+            padding-right: 3%;
         }
         .details-stats-info{
             width: 100%;
@@ -258,7 +262,7 @@ export default {
             background-color: gainsboro;
             border: none;
             margin: 0;
-            overflow: auto;
+            height: fit-content;
             &::-webkit-scrollbar {
                 display: none;
             }
