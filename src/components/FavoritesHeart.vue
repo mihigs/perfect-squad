@@ -13,7 +13,7 @@ export default {
     props: ['toggleable', 'toggled'],
     data(){
         return {
-            isActive: false,
+            isActive: false, //is the heart red or not
         }
     },
     methods:{
@@ -44,6 +44,7 @@ export default {
             animation: fillIn 0.2s ease;
         }
     }
+    //heart animation
     @keyframes fillIn {
         0% { transform: scale(1); }
         100% { transform: scale(1.5); }

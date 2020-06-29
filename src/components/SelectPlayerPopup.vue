@@ -1,5 +1,7 @@
 <template>
+<!-- Popup -->
   <div class="select-player-popup-container" @click.stop="closePopup()">
+      <!-- Popup header, with filters to sort by -->
       <div class="position-name">{{exactPosition}}</div>
       <div class="sort-bar">
         <div class="sort-option" v-bind:class="{active: sortedBy === 0}" @click.stop="sortByPopularity()">Popularity</div>
@@ -7,6 +9,7 @@
         <div class="sort-option" v-bind:class="{active: sortedBy === 2}" @click.stop="sortByAge()">Age</div>
       </div>
       <div class="menu-container">
+          <!-- Players -->
           <div class="players-item-container" v-for="player in players" :key="player.ID">
             <PlayersItem 
             v-bind:player="player"
@@ -34,7 +37,7 @@ export default {
     data(){
         return {
             players: [],
-            sortedBy: 0,
+            sortedBy: 0, //0 - pop, 1 - val, 2 - age
         }
     },
     methods: {
@@ -43,6 +46,7 @@ export default {
             else this.$emit('closePopup')
         },
         removeSelectedPlayer: function(){
+            //sends event to parent component for removal
             this.$emit('removeSelectedPlayer');
         },
         sortByPopularity: function(){
@@ -59,10 +63,8 @@ export default {
             this.players = this.players = this.players.sort(function(a, b){ return a.stats.age - b.stats.age });
             this.sortedBy = 2;
         },
-        handleScrolling: function(event){
-            console.log('sth');
-            event;
-            //console.log(window.scrollBy);
+        handleScrolling: function(e){
+            this.$el.lastElementChild.scrollBy(e.deltaY*(0.4), 0);
         },
     },
     created(){
@@ -83,10 +85,11 @@ export default {
     },
     mounted(){
         //listens for scrolling, used to scroll elements horizontally
-        //REMOVE THE EVENT LISTENER
-        this.$el.addEventListener('wheel', e => {
-            this.$el.lastElementChild.scrollBy(e.deltaY*(0.4), 0);
-        });
+        this.$el.lastElementChild.addEventListener('wheel', this.handleScrolling);
+    },
+    beforeDestroy(){
+        //removes the on scroll event listener
+        this.$el.lastElementChild.removeEventListener('wheel', this.handleScrolling);
     },
 }
 </script>

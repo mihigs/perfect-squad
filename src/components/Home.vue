@@ -13,7 +13,7 @@
                 v-bind:position="'F-ATT'">
                 </PlayerCircle>
             </div>
-            <!-- MID ROWs -->
+            <!-- MID ROWS -->
             <div class="field-row">
                 <PlayerCircle v-for="index in selectedFormation.parsedFormation[3]" :key="index"
                 v-bind:generalPosition="'MID'"

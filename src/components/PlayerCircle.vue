@@ -4,12 +4,13 @@
         <div class="formation-picture" :style="{ backgroundImage: `url(${selectedPlayer.formationPicture}`}"></div>
       </div>
       <div class="player-last-name">{{selectedPlayer.lastName ? selectedPlayer.lastName : selectedPlayer.name}}</div>
+      <!-- Popup for selecting a favorite player -->
       <SelectPlayerPopup @closePopup="closePlayerSelectPopup($event)" 
-      v-if="popupShown" 
-      v-bind:generalPosition="generalPosition" 
-      v-bind:exactPosition="exactPlayerPosition"
-      v-bind:selectedPlayer="selectedPlayer"
-      @removeSelectedPlayer="removeSelectedPlayer()">
+        v-if="popupShown" 
+        v-bind:generalPosition="generalPosition" 
+        v-bind:exactPosition="exactPlayerPosition"
+        v-bind:selectedPlayer="selectedPlayer"
+        @removeSelectedPlayer="removeSelectedPlayer()">
       </SelectPlayerPopup>
   </div>
 </template>
@@ -47,11 +48,6 @@ export default {
         removeSelectedPlayer: function(){
             this.selectedPlayer = false;
         },
-    },
-    mounted(){
-        document.addEventListener('keydown', e => {
-            if(e.key === "Escape") this.closePlayerSelectPopup();
-        });
     },
     computed: {
         //calculates the exact position for which the user picks the player for

@@ -1,11 +1,13 @@
 <template>
   <div>
+    <!-- Players item -->
     <div class="players-item">
           <div class="players-item-bar" @click.stop="expandPlayer()">
             <FavoritesHeart v-bind:toggleable="editFavorite" v-bind:toggled="player.favorite" @toggleFavorite="toggleFavorite($event)"></FavoritesHeart>
             <div class="players-item-name">{{player.name.toUpperCase()}} {{player.lastName.toUpperCase()}}</div>
             <div class="players-item-position" :style="{ color: `${positionColor}` }">{{player.stats.position}}</div>
           </div>
+          <!-- When expanded, shows this -->
             <div class="players-expanded" :class="{active: playerExpanded}" @click.stop="showDetails()">
               <div :style="{ backgroundImage: `url(${player.playerPicture}`}" class="players-item-image"></div>
               <div class="players-item-bottom" :class="{active: playerExpanded}">
@@ -52,6 +54,8 @@ export default {
         if(event.addedToFavorites) this.$emit('closePopup', {playerID: this.player.ID});
         else if(!event.addedToFavorites) this.$emit('removeSelectedPlayer');
       },
+      //uses vue router to check for mobile backbutton press (also works on browsers)
+      //and then closes the popup
       handleDetailsNavigation: function(next){
         if(this.detailsOpen){
           this.detailsOpen = false;
@@ -68,6 +72,7 @@ export default {
         })
     },
     computed: {
+      //returns the color in which to display the players position
       positionColor: function(){
         let color = '';
         switch (this.playerPosition) {
@@ -120,8 +125,6 @@ export default {
       transition: height .3s;
       &.active{
         height: 300px;
-        //??
-        transition: height .3s;
       }
     }
   .players-item-image{

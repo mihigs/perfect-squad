@@ -36,7 +36,7 @@ export default {
             }
         });
     },
-    //in case data fails to load, state data status is 2
+    //in case data from JSONblob fails to load, state data status is 2
     errorLoadingPlayerData(state){
         state.status = 2;
     },
@@ -68,11 +68,6 @@ export default {
             tempParsedFormation[2] -= 2;
             tempParsedFormation.splice(3, 0, 2);
         }
-        //makes ATK look better
-        // if(tempParsedFormation.length < 5 && tempParsedFormation[3] > 2){
-        //     tempParsedFormation.push(1);
-        //     tempParsedFormation[3] -= 1;
-        // }
         if(tempParsedFormation.length < 5 && tempParsedFormation[2] > 2){
             tempParsedFormation[4] = tempParsedFormation[3];
             tempParsedFormation[3] = 0;

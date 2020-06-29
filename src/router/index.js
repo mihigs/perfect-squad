@@ -11,6 +11,7 @@ const routes = [
     { path: '/', alias: '/home', component: Home },
     { path: '/players', component: Players },
     { path: '/favorites', component: Favorites },
+    { path: '*', component: Home } //could lead to a 404 not found page
 ];
 
 const router = new VueRouter({

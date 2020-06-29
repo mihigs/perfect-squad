@@ -24,7 +24,7 @@ export default {
   },
   data(){
     return{
-      players: {},
+      players: {}, //all the favorite players
       playersLoaded: false,
     }
   },
@@ -33,13 +33,19 @@ export default {
     this.players = this.$store.getters.favoritePlayers;
     if(this.players.length !== 0) this.playersLoaded = true;
   },
+  methods: {
+    handleScrolling: function(e){
+      this.$el.lastElementChild.scrollBy(e.deltaY*(0.4), 0);
+    }
+  },
   mounted(){
-        //listens for scrolling, used to scroll elements horizontally
-        //REMOVE THE EVENT LISTENER
-        this.$el.addEventListener('wheel', e => {
-            this.$el.lastElementChild.scrollBy(e.deltaY*(0.4), 0);
-        })
-    },
+    //listens for scrolling, used to scroll elements horizontally
+    this.$el.addEventListener('wheel', this.handleScrolling);
+  },
+  beforeDestroy(){
+    //removes the on-scroll event listener
+    this.$el.removeEventListener('wheel', this.handleScrolling);
+  },
 }
 </script>
 
@@ -70,7 +76,7 @@ export default {
           padding-top: 10%;
           margin-left: 10%;
           display: flex;
-          justify-content: start;
+          justify-content: flex-start;
           overflow-y: hidden;
           overflow-x: scroll;
 

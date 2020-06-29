@@ -3,17 +3,21 @@
       <router-link to="/home" class="logo">
         <p>Perfect Squad</p>
       </router-link>
+      <!-- Navbar menu -->
     <div class="hamburger" @click.self="()=>{menuOpen = !menuOpen}" :class="{active: menuOpen}"></div>
         <div class="menu" :class="{active: menuOpen}">
-            <div @click="()=>{menuOpen = !menuOpen}">
+            <!-- Players -->
+            <div @click="()=>{menuOpen = !menuOpen}" class="menu-item-container">
                 <router-link to="/players" class="menu-item">Players</router-link>
             </div>
-            <div @click="()=>{menuOpen = !menuOpen}">
+            <!-- Favorites -->
+            <div @click="()=>{menuOpen = !menuOpen}" class="menu-item-container">
                 <router-link to="/favorites" class="menu-item" id="favorites">Favorites</router-link>
             </div>
+            <!-- Dropdown -->
             <FormationDropdown class="dropdown" id="dropdown"></FormationDropdown>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -41,7 +45,6 @@ export default {
         width: 100%;
         height: 5vh;
         background-color: #253e02;
-        border-bottom: 1px solid #253e02;
         box-shadow: 0px 2px 2px 0
         rgba(0,0,0,0.3);
         color: white;
@@ -62,7 +65,6 @@ export default {
         .menu{
             display: flex;
             align-content: flex-end;
-
             .menu-item{
                 margin-left: 25px;
                 line-height: 250%;
@@ -103,11 +105,9 @@ export default {
             top: 7vh;
             background-color: #213802;
             display: block;
-            &.active{
-                width: 100%;
-                .menu-item, .dropdown{
-                    transform: translateY(0px);
-                }
+            .menu-item-container{
+                transition: all .3s;
+                transform: translateX(100%);   
             }
             .menu-item, .dropdown{
                 border-bottom: 1px solid rgb(36, 36, 36);
@@ -118,6 +118,15 @@ export default {
                 display: block;
                 transition: all .3s;
                 transform: translateX(100%);
+            }
+            &.active{
+                width: 100%;
+                .menu-item, .dropdown{
+                    transform: translateY(0px);
+                }
+                .menu-item-container{
+                    transform: translateY(0px);   
+                }
             }
             #favorites{
                 transition-delay: .1s;

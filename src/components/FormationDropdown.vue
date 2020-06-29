@@ -82,7 +82,6 @@ export default {
             height: 50px;
             line-height: 300%;
             cursor: pointer;
-            border-bottom: 1px solid rgb(39, 39, 39);
 
             &:hover{
                 color: #f09e00;

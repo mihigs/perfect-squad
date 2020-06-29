@@ -64,15 +64,12 @@ export default {
     components: {
         PlayersStars,
     },
-    data(){
-        return{
-        }
-    },
     methods: {
         //emits the closePopup event to the parent
         closePopup: function() {
             this.$emit('closePopup');
         },
+        //capitalises strings (for names and nationalities)
         capitaliseString: function(string){
             let tempString = string.slice(1)
             return string[0].toUpperCase() + tempString;
@@ -84,7 +81,7 @@ export default {
             if(this.player.stats.preferredFoot === 'right') return 'left';
             else return 'right';
         },
-        //puts all the possible positions from the array into a string
+        //puts all the possible positions from the array into a single string
         playerPossiblePositions: function(){
             let possiblePositions = '';
             this.player.stats.posiblePositions.forEach(position => {
