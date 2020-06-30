@@ -157,4 +157,9 @@ export default {
             height: 60%;
         }
     }
+    @media only screen and (max-height: 690px){
+        .home-safe-space{
+            height: 1vh;
+        }
+    }
 </style>

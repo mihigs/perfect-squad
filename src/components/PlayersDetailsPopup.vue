@@ -171,10 +171,8 @@ export default {
         height: 6%;
         margin-top: 1%;
         line-height: 200%;
-    }
-    .details-data{
-        float: right;
-
+        display: flex;
+        justify-content: space-between;
     }
     .details-player-icon{
         height: 100%;
