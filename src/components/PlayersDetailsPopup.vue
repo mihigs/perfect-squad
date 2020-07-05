@@ -12,7 +12,18 @@
             <div class="details-basic-info-header">
                 <div class="details-player-name">{{player.name}} {{player.lastName}}</div>
                 <div class="details-player-position"><div class="details-player-position-text">{{player.stats.position}}</div></div>
-                <PlayersStars v-bind:player="player"></PlayersStars>
+                <StarRating class="star-rating"
+                    @rating-selected="updatePlayerRating"
+                    :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"
+                    :active-color="'#EABA08'" 
+                    :inactive-color='"#b7b7b7"'
+                    :border-width="-1"
+                    :star-size="30" 
+                    :max-rating="5" 
+                    :show-rating="false" 
+                    :increment="0.01" 
+                    v-model="player.rating">
+                </StarRating>
             </div>
             <div class="details-player-picture" :style="{ backgroundImage: `url(${player.formationPicture}`}"></div>
             <!-- Nationality -->
@@ -27,6 +38,8 @@
             <div class="details-bar">Birth Date<div class="details-data">{{player.stats.birthDate}}</div></div>
             <!-- Age -->
             <div class="details-bar">Age<div class="details-data">{{player.stats.age}}</div></div>
+            <!-- Popularity -->
+            <div class="details-bar">Popularity<div class="details-data">{{playerRating}}</div></div>
             <!-- Prefered positions -->
             <div class="details-bar">Prefered Positions<div class="details-data">{{player.stats.position}}</div></div>
             <!-- Available positions -->
@@ -56,13 +69,18 @@
 </template>
 
 <script>
-import PlayersStars from './PlayersStars'
+import StarRating from 'vue-star-rating'
 
 export default {
     name: 'PlayersDetailsPopup',
     props: ['player', 'detailsOpen'],
     components: {
-        PlayersStars,
+        StarRating,
+    },
+    data(){
+        return{
+            playerRating: Math.round((this.player.rating + Number.EPSILON) * 100) / 100,
+        }
     },
     methods: {
         //emits the closePopup event to the parent
@@ -74,6 +92,12 @@ export default {
             let tempString = string.slice(1)
             return string[0].toUpperCase() + tempString;
         },
+        //updates player rating when rated
+        updatePlayerRating: function(event){
+            this.$store.dispatch('addPlayerRating', { rating: event, playerID: this.player.ID });
+            let rating = this.$store.getters.players[this.player.ID].rating;
+            this.playerRating = Math.round((rating + Number.EPSILON) * 100) / 100;
+        }
     },
     computed: {
         //only prefered foot is in the data, so we just switch to get the weak foot
@@ -154,7 +178,7 @@ export default {
         line-height: 250%;
         font-size: 80%;
     }
-    .details-player-rating{
+    .star-rating{
         float: right;
     }
     .details-player-picture{
