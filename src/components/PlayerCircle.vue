@@ -6,9 +6,9 @@
       <div class="player-last-name">{{selectedPlayer.lastName ? selectedPlayer.lastName : selectedPlayer.name}}</div>
       <!-- Popup for selecting a favorite player -->
       <SelectPlayerPopup @closePopup="closePlayerSelectPopup($event)" 
-        v-if="popupShown" 
-        v-bind:generalPosition="generalPosition" 
-        v-bind:exactPosition="exactPlayerPosition"
+        v-if="popupShown"
+        v-bind:generalPosition="generalPosition"
+        v-bind:position="position"
         v-bind:selectedPlayer="selectedPlayer"
         @removeSelectedPlayer="removeSelectedPlayer()">
       </SelectPlayerPopup>
@@ -20,7 +20,7 @@ import SelectPlayerPopup from './SelectPlayerPopup'
 
 export default {
     name: 'PlayerCircle',
-    props: [ 'generalPosition', 'playerWing', 'playersInRow', 'position' ],
+    props: [ 'generalPosition', 'playersInRow', 'position' ],
     components: {
         SelectPlayerPopup,
     },
@@ -48,29 +48,6 @@ export default {
         removeSelectedPlayer: function(){
             this.selectedPlayer = false;
         },
-    },
-    computed: {
-        //calculates the exact position for which the user picks the player for
-        //the output is shown on top of the popup
-        exactPlayerPosition: function() {
-            if(this.generalPosition === 'GK') return 'GK';
-            else if(this.generalPosition === 'DEF'){
-                if(this.playersInRow === 1 || (this.playersInRow === 3 && this.playerWing === 2)) return 'CB';
-                else if(this.playersInRow >= 2 && this.playerWing === 1) return 'LB';
-                else return 'RB'; 
-            }else if(this.position === 'R-MID'){
-                if(this.playersInRow === 1 || (this.playersInRow === 3 && this.playerWing === 2)) return 'CM';
-                else if(this.playersInRow >= 2 && this.playerWing === 1) return 'LM';
-                else return 'RM';
-            }else if(this.position === 'F-MID'){
-                return 'AM';
-            }else if(this.generalPosition === 'ATT'){
-                if(this.playersInRow === 1 || (this.playersInRow === 3 && this.playerWing === 2)) return 'CF';
-                else if(this.playersInRow >= 2 && this.playerWing === 1) return 'LW';
-                else return 'RW';
-            }
-            return 'n/a';
-        }
     },
 }
 </script>

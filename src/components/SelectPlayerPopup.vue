@@ -2,7 +2,7 @@
 <!-- Popup -->
   <div class="select-player-popup-container" @click.stop="closePopup()">
       <!-- Popup header, with filters to sort by -->
-      <div class="position-name">{{exactPosition}}</div>
+      <div class="position-name">{{position}}</div>
       <div class="sort-bar">
         <div class="sort-option" v-bind:class="{active: sortedBy === 0}" @click.stop="sortByPopularity()">Popularity</div>
         <div class="sort-option" v-bind:class="{active: sortedBy === 1}" @click.stop="sortByValue()">Value</div>
@@ -30,7 +30,7 @@ import PlayersItem from './PlayersItem'
 
 export default {
     name: 'SelectPlayerPopup',
-    props: [ 'generalPosition', 'exactPosition', 'selectedPlayer' ],
+    props: [ 'generalPosition', 'position', 'selectedPlayer' ],
     components: {
         PlayersItem,
     },
@@ -75,8 +75,8 @@ export default {
         let playersIDs = this.$store.getters.sortedPlayersIDs[this.generalPosition];
         let players = this.$store.getters.players;
         playersIDs.forEach(playerID => {
-            players[playerID].stats.posiblePositions.forEach(position => {
-                if(this.exactPosition === position && !players[playerID].favorite) 
+            players[playerID].stats.posiblePositions.forEach(possiblePosition => {
+                if(this.position === possiblePosition && !players[playerID].favorite) 
                     this.players.push(players[playerID]);
             });
         });

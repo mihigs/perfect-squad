@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="dropdown-button" @click="toggleDropdown()">
-            Formation: {{selectedFormation}}
+            Formation: {{selectedFormation.formation}}
         </div>
         <transition name="dropdown">
             <div class="dropdown-container" v-if="showDropdown">
-                <div class="dropdown-item" v-for="(formation, index) in formations" :key="index" @click="selectFormation(formation, index)">
-                    {{formation}}
+                <div class="dropdown-item" v-for="(formation, index) in formations" :key="index" @click="selectFormation(formation)">
+                    {{formation.formation}}
                 </div>
             </div>
         </transition>
@@ -19,8 +19,8 @@ export default {
     data(){
         return{
             showDropdown: false,
-            formations: {},
-            selectedFormation: 'Loading..',
+            formations: [],
+            selectedFormation: { formation: 'Loading...' },
             stateStatus: 0,
         }
     },
@@ -28,11 +28,11 @@ export default {
         toggleDropdown: function(){
             this.showDropdown = !this.showDropdown;
         },
-        selectFormation: function(formation, index){
+        selectFormation: function(formation){
             this.selectedFormation = formation;
             this.showDropdown = false;
             //saves selected formation to the state
-            this.$store.dispatch('selectFormation', { formation: formation, index: index });
+            this.$store.dispatch('selectFormation', { formation: formation });
         },
     },
     created(){
@@ -44,8 +44,8 @@ export default {
                 this.stateStatus = this.$store.getters.status;
                 //when the data is loaded, the user can select formation
                 if(this.stateStatus === 1) {
-                    this.formations = Object.keys(this.$store.getters.formations);
-                    this.selectedFormation = 'not selected';
+                    this.formations = this.$store.getters.formations;
+                    this.selectedFormation.formation = 'not selected';
                 //if data fails to load
                 }else if(this.stateStatus === 2){
                     this.selectedFormation = 'Error loading data!';

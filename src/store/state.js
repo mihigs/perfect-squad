@@ -1,7 +1,7 @@
 export default {
     status: 0,
     players: [],
-    formations: {},
+    formations: [],
     favoritePlayers: [],
 
     //holds players IDs, sorted by position
@@ -15,10 +15,6 @@ export default {
 
     //currently selected formation
     selectedFormation: {
-        //default id is -1, when no formation is selected
-        id: -1,
-        formation: {},
-        //parsed formation data, to be used for display on the homepage
-        parsedFormation: [],
+        formation: false,
     },
 }

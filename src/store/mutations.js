@@ -1,8 +1,21 @@
 export default {
     //loads data from JSON blob into state
     loadPlayerData(state, data){
-        // state.players = data.players;
-        state.formations = data.formations;
+        Object.keys(data.formations).forEach((formation) => {
+            let tempFormation = data.formations[formation];
+
+            //we need to parse formation data so it can be displayed by the UI dynamically
+            let tempParsedFormation = [];
+            tempParsedFormation = tempFormation.formation.split('-');
+            //parses string formation to numbers
+            tempParsedFormation.forEach((position, index) => {
+                tempParsedFormation[index] = parseInt(position);
+            });
+            tempFormation.parsedFormation = tempParsedFormation;
+
+            state.formations.push(tempFormation);
+        });
+        state.formations = state.formations.sort((a, b) => {return (a.parsedFormation[0] * 10 + a.parsedFormation[1]) - (b.parsedFormation[0] * 10 + b.parsedFormation[1])});
         state.status = 1;
 
         //adds meta data and sorts players based on position
@@ -42,38 +55,36 @@ export default {
     },
     //saves selected formation to state
     saveSelectedFormation(state, data){
-        state.selectedFormation.id = data.index;
-        state.selectedFormation.formation = data.formation;
-
-        //we need to parse formation data so it can be displayed by the UI dynamically
-        let tempParsedFormation = [];
-        tempParsedFormation = state.selectedFormation.formation.split('-');
-        //parses string formation to numbers
-        tempParsedFormation.forEach((position, index) => {
-            tempParsedFormation[index] = parseInt(position);
-        });
-        //if the DEF has more players, shift some forward
-        if(tempParsedFormation[0] > 2){
-            tempParsedFormation.unshift(2);
-            tempParsedFormation[1] -= 2;
-        }
-        //sorts DEF players to make it look better
-        if(tempParsedFormation[0] > tempParsedFormation[1]){
-            let temp = tempParsedFormation[0];
-            tempParsedFormation[0] = tempParsedFormation[1];
-            tempParsedFormation[1] = temp;
-        }
-        //if the MID has more players, shift some forward
-        if(tempParsedFormation[2] >= 4){
-            tempParsedFormation[2] -= 2;
-            tempParsedFormation.splice(3, 0, 2);
-        }
-        if(tempParsedFormation.length < 5 && tempParsedFormation[2] > 2){
-            tempParsedFormation[4] = tempParsedFormation[3];
-            tempParsedFormation[3] = 0;
-        }
-        //saves all the parsed formation to state
-        state.selectedFormation.parsedFormation = tempParsedFormation;
+        state.selectedFormation = data.formation;
+        // //we need to parse formation data so it can be displayed by the UI dynamically
+        // let tempParsedFormation = [];
+        // tempParsedFormation = state.selectedFormation.formation.split('-');
+        // //parses string formation to numbers
+        // tempParsedFormation.forEach((position, index) => {
+        //     tempParsedFormation[index] = parseInt(position);
+        // });
+        // //if the DEF has more players, shift some forward
+        // if(tempParsedFormation[0] > 2){
+        //     tempParsedFormation.unshift(2);
+        //     tempParsedFormation[1] -= 2;
+        // }
+        // //sorts DEF players to make it look better
+        // if(tempParsedFormation[0] > tempParsedFormation[1]){
+        //     let temp = tempParsedFormation[0];
+        //     tempParsedFormation[0] = tempParsedFormation[1];
+        //     tempParsedFormation[1] = temp;
+        // }
+        // //if the MID has more players, shift some forward
+        // if(tempParsedFormation[2] >= 4){
+        //     tempParsedFormation[2] -= 2;
+        //     tempParsedFormation.splice(3, 0, 2);
+        // }
+        // if(tempParsedFormation.length < 5 && tempParsedFormation[2] > 2){
+        //     tempParsedFormation[4] = tempParsedFormation[3];
+        //     tempParsedFormation[3] = 0;
+        // }
+        // //saves all the parsed formation to state
+        // state.selectedFormation.parsedFormation = tempParsedFormation;
     },
     savePlayerRating(state, { rating, playerID }){
         state.players[playerID].ratings.push(rating);
